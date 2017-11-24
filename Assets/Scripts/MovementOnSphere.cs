@@ -14,20 +14,22 @@ public class MovementOnSphere : MonoBehaviour {
 	private float _distanceToTarget = 0;
 
 	private float _meshRadius = 0;
-
+    private Dude _dude;
 
 	public UnityEvent OnReachedTarget = new UnityEvent();
 
-	private void Start(){
+	private void Start() {
+	    _dude = GetComponent<Dude>();
 		_meshRadius = GetComponentInChildren<MeshFilter> ().mesh.bounds.size.x * 0.5f;
 	}
 
-	void Update(){
+	void Update() {
 		MoveToTarget ();
 	}
 
-	private void MoveToTarget(){ 
-		if (_target == null) {
+	private void MoveToTarget() {
+	    if (_dude.State != Dude.DudeState.Walking) return;
+        if (_target == null) {
 			return;
 		}
 

@@ -67,6 +67,7 @@ public class Dude : MonoBehaviour
         _renderer.material = _defaultMaterial;
         _highlighted = false;
         State = DudeState.Walking;
+        FindNewTarget();
     }
     
     private void FindNewTarget(){
