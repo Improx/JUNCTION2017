@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public abstract class MeltableBase : MonoBehaviour {
 
@@ -13,6 +14,30 @@ public abstract class MeltableBase : MonoBehaviour {
 	private Planet _planet;
 	private Vector3 _vectorToPlanet;
 
+	public UnityEvent OnMelted = new UnityEvent();
+
+	public static List<MeltableBase> meltables = new List<MeltableBase>();
+
+	public static MeltableBase GetClosestMeltable(Vector3 position){
+
+		float closestDistance = Mathf.Infinity;
+		MeltableBase closestMeltable = null;
+
+		foreach (var meltable in MeltableBase.meltables) {
+			float distance = Vector3.Distance (position, meltable.transform.position);
+			if (distance < closestDistance) {
+				closestDistance = distance;
+				closestMeltable = meltable;
+			}
+		}
+
+		return closestMeltable;
+	}
+
+	void Awake(){
+		meltables.Add (this);
+	}
+
 	void Start(){
 		_currentHealth = _startingHealth;
 		_startingScale = transform.localScale;
@@ -20,7 +45,6 @@ public abstract class MeltableBase : MonoBehaviour {
 
 		_vectorToPlanet = (_planet.transform.position - transform.position).normalized;
 		transform.rotation = Quaternion.LookRotation (-_vectorToPlanet);
-
 	}
 
 	public void AddHealth(float amount){
@@ -33,7 +57,9 @@ public abstract class MeltableBase : MonoBehaviour {
 	}
 
 	private void Die(){
+		MeltableBase.meltables.Remove (this);
 		Destroy (gameObject);
+		OnMelted.Invoke ();
 	}
 		
 
@@ -44,6 +70,6 @@ public abstract class MeltableBase : MonoBehaviour {
 	}
 
 	public float GetRadius(){
-		return _meshFilter.mesh.bounds.size.x;
+		return (_meshFilter.mesh.bounds.size.x * transform.lossyScale.x) * 0.5f;
 	}
 }
