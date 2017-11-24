@@ -25,7 +25,7 @@ public class Dude : MonoBehaviour
 	private float _dps = 1;
 
 	void Start () {
-	    _renderer = GetComponent<Renderer>();
+	    _renderer = GetComponentInChildren<Renderer>();
 	    _defaultMaterial = _renderer.material;
 
 		_movement = GetComponent<MovementOnSphere> ();
