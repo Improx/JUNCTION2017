@@ -1,79 +1,74 @@
 fileFormatVersion: 2
-guid: 573d609876caa4ede81c125e4512103f
-timeCreated: 1511553607
+guid: 42ef27aa3d24f40abb9d313ef51aa56b
+timeCreated: 1511558295
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: Armature
-    100004: Bone
-    100006: Bone_001
-    100008: Bone_002
-    100010: Bone_003
-    100012: Bone_004
-    100014: Bone_005
-    100016: Bone_006
-    100018: Bone_007
-    100020: Bone_008
-    100022: Bone_009
-    100024: Bone_010
-    100026: Bone_011
-    100028: Bone_012
-    100030: Bone_013
-    100032: Bone_014
-    100034: Bone_015
-    100036: Bone_016
-    100038: Bone_017
-    100040: Bone_018
-    100042: Cube
-    100044: rig
-    100046: WGT-rig_root
-    100048: WGTS_rig
-    400000: //RootNode
-    400002: Armature
-    400004: Bone
-    400006: Bone_001
-    400008: Bone_002
-    400010: Bone_003
-    400012: Bone_004
-    400014: Bone_005
-    400016: Bone_006
-    400018: Bone_007
-    400020: Bone_008
-    400022: Bone_009
-    400024: Bone_010
-    400026: Bone_011
-    400028: Bone_012
-    400030: Bone_013
-    400032: Bone_014
-    400034: Bone_015
-    400036: Bone_016
-    400038: Bone_017
-    400040: Bone_018
-    400042: Cube
-    400044: rig
-    400046: WGT-rig_root
-    400048: WGTS_rig
-    2300000: //RootNode
-    2300002: WGT-rig_root
-    2300004: WGTS_rig
-    3300000: //RootNode
-    3300002: WGT-rig_root
-    3300004: WGTS_rig
+    100000: Armature
+    100002: Bone
+    100004: Bone.001
+    100006: Bone.002
+    100008: Bone.003
+    100010: Bone.004
+    100012: Bone.005
+    100014: Bone.006
+    100016: Bone.006_end
+    100018: Bone.007
+    100020: Bone.008
+    100022: Bone.009
+    100024: Bone.009_end
+    100026: Bone.010
+    100028: Bone.011
+    100030: Bone.012
+    100032: Bone.012_end
+    100034: Bone.013
+    100036: Bone.014
+    100038: Bone.015
+    100040: Bone.015_end
+    100042: Bone.016
+    100044: Bone.017
+    100046: Bone.018
+    100048: Bone.018_end
+    100050: Cube
+    100052: //RootNode
+    400000: Armature
+    400002: Bone
+    400004: Bone.001
+    400006: Bone.002
+    400008: Bone.003
+    400010: Bone.004
+    400012: Bone.005
+    400014: Bone.006
+    400016: Bone.006_end
+    400018: Bone.007
+    400020: Bone.008
+    400022: Bone.009
+    400024: Bone.009_end
+    400026: Bone.010
+    400028: Bone.011
+    400030: Bone.012
+    400032: Bone.012_end
+    400034: Bone.013
+    400036: Bone.014
+    400038: Bone.015
+    400040: Bone.015_end
+    400042: Bone.016
+    400044: Bone.017
+    400046: Bone.018
+    400048: Bone.018_end
+    400050: Cube
+    400052: //RootNode
     4300000: Cube
-    4300002: WGTS_rig
-    4300004: WGT-rig_root
-    7400000: Default Take
-    7400002: Mint
+    7400000: Armature|Mint
     9500000: //RootNode
     13700000: Cube
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: unnamed
-    second: {fileID: 2100000, guid: 72d7461bd7f5946bf9864f346677f87c, type: 2}
+      name: No Name
+    second: {fileID: 2100000, guid: fa2354145d34c496eb6fafced3bd6560, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
