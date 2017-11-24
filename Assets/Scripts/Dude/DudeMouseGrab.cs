@@ -44,14 +44,19 @@ public class DudeMouseGrab : MonoBehaviour
         if (Grabbed) return false;
 
         Grabbed = dude;
-        dude.GetComponent<Collider>().enabled = false;
+        foreach (var col in Grabbed.GetComponentsInChildren<Collider>())
+        {
+            col.enabled = false;
+        }
         return true;
     }
 
     public void Release()
     {
         if (!Grabbed) return;
-        Grabbed.GetComponent<Collider>().enabled = enabled;
+        foreach (var col in Grabbed.GetComponentsInChildren<Collider>()) {
+            col.enabled = true;
+        }
         Grabbed.Release();
 
         Grabbed = null;
