@@ -20,7 +20,7 @@ public class MovementOnSphere : MonoBehaviour {
 
 	private void Start() {
 	    _dude = GetComponent<Dude>();
-		_meshRadius = GetComponentInChildren<MeshFilter> ().mesh.bounds.size.x * 0.5f;
+		_meshRadius = _planet.GetComponentInChildren<MeshFilter> ().mesh.bounds.size.x * 0.5f;
 	}
 
 	void Update() {
