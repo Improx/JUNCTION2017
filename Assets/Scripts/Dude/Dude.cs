@@ -14,7 +14,7 @@ public class Dude : MonoBehaviour
         Idle,
         Walking,
         Grabbed,
-		    Melting
+		Melting
     }
 
     public DudeState State;
@@ -41,11 +41,11 @@ public class Dude : MonoBehaviour
 	        _highlighted = false;
         }
 		switch (State) {
-		case DudeState.Melting:
-			_target.AddHealth (-_dps);
-			break;
-		default:
-			break;
+		    case DudeState.Melting:
+			    _target.AddHealth (-_dps);
+			    break;
+		    default:
+			    break;
 		}
 	}
 
