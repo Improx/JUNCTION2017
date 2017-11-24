@@ -29,7 +29,10 @@ public class DudeMouseGrab : MonoBehaviour
 	                if (hit.collider.gameObject == Planet)
 	                {
 	                    Grabbed.transform.position = hit.point;
-                    }
+
+	                    var vectorFromPlanet =  Grabbed.transform.position - Planet.transform.position;
+	                    Grabbed.transform.up = vectorFromPlanet;
+	                }
 	            }
 	        }
 	    }
