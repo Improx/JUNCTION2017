@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class MovementOnSphere : MonoBehaviour {
 
@@ -10,8 +11,16 @@ public class MovementOnSphere : MonoBehaviour {
 	private float _movementSpeed = 10f;
 	[SerializeField]
 	private MeltableBase _target;
-	private Vector3 _pivotOffset;
 	private float _distanceToTarget = 0;
+
+	private float _meshRadius = 0;
+
+
+	public UnityEvent OnReachedTarget = new UnityEvent();
+
+	private void Start(){
+		_meshRadius = GetComponentInChildren<MeshFilter> ().mesh.bounds.size.x * 0.5f;
+	}
 
 	void Update(){
 		MoveToTarget ();
@@ -25,10 +34,11 @@ public class MovementOnSphere : MonoBehaviour {
 		Vector3 axis = Vector3.Cross (_target.transform.position - transform.position, _planet.transform.position - transform.position);
 		transform.RotateAround (_planet.transform.position, axis.normalized, _movementSpeed * Time.deltaTime);
 
-		_distanceToTarget = Vector3.Distance (transform.position - _pivotOffset, _target.transform.position);
+		_distanceToTarget = Vector3.Distance (transform.position, _target.transform.position);
 
-		if (_distanceToTarget <= _target.GetRadius()) {
+		if (_distanceToTarget <= _target.GetRadius() + _meshRadius) {
 			_target = null;
+			OnReachedTarget.Invoke ();
 		}
 	}
 
