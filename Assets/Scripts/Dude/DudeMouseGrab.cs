@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DudeMouseGrab : MonoBehaviour
@@ -29,7 +27,10 @@ public class DudeMouseGrab : MonoBehaviour
 	                if (hit.collider.gameObject == Planet)
 	                {
 	                    Grabbed.transform.position = hit.point;
-                    }
+
+	                    var vectorFromPlanet =  Grabbed.transform.position - Planet.transform.position;
+	                    Grabbed.transform.up = vectorFromPlanet;
+	                }
 	            }
 	        }
 	    }
@@ -44,14 +45,19 @@ public class DudeMouseGrab : MonoBehaviour
         if (Grabbed) return false;
 
         Grabbed = dude;
-        dude.GetComponent<Collider>().enabled = false;
+        foreach (var col in Grabbed.GetComponentsInChildren<Collider>())
+        {
+            col.enabled = false;
+        }
         return true;
     }
 
     public void Release()
     {
         if (!Grabbed) return;
-        Grabbed.GetComponent<Collider>().enabled = enabled;
+        foreach (var col in Grabbed.GetComponentsInChildren<Collider>()) {
+            col.enabled = true;
+        }
         Grabbed.Release();
 
         Grabbed = null;
