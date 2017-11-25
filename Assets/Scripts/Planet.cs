@@ -6,9 +6,8 @@ public class Planet : MonoBehaviour {
 	public float Radius {
 		get {
 			if (_radius == 0) {
-				_radius = GetComponent<MeshFilter> ().mesh.bounds.size.x;
+				_radius = GetComponentInChildren<SphereCollider>().radius * GetComponentInChildren<SphereCollider>().transform.lossyScale.x;
 			}
-			print (_radius);
 			return _radius;
 		}
 	}

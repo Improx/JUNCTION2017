@@ -28,10 +28,6 @@ public class DudeViveGrab : MonoBehaviour
 		Release ();
 	}
 
-    private void _controller_TriggerUnClicked(object sender, ClickedEventArgs e) {
-        Release();
-    }
-
     // Update is called once per frame
     void Update () {
 
@@ -63,7 +59,7 @@ public class DudeViveGrab : MonoBehaviour
             col.enabled = true;
         }
         Grabbed.transform.SetParent(null);
-        Grabbed.Release();
+        Grabbed.Release(FindObjectOfType<Planet>());
 
         AnimationController.SetBool("Grabbed", false);
         Grabbed = null;
