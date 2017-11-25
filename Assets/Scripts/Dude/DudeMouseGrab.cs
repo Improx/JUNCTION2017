@@ -14,23 +14,25 @@ public class DudeMouseGrab : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void LateUpdate () {
 	    if (!Grabbed) return;
 	    if (Grabbed.State != Dude.DudeState.Grabbed) return;
 	    var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
 	    RaycastHit hit;
-	    if (!Physics.Raycast(ray, out hit)) return;
-	    if (!hit.rigidbody || !hit.rigidbody.GetComponent<Planet>()) return;
-	    var planet = hit.rigidbody.GetComponent<Planet>();
+	    if (Physics.Raycast(ray, out hit)) {
+	        if (hit.rigidbody && hit.rigidbody.GetComponent<Planet>()) {
+	            var planet = hit.rigidbody.GetComponent<Planet>();
 
-        Grabbed.transform.position = hit.point;
+	            Grabbed.transform.position = hit.point;
 
-	    var vectorFromPlanet =  Grabbed.transform.position - planet.transform.position;
-	    Grabbed.transform.up = vectorFromPlanet;
+	            var vectorFromPlanet = (Grabbed.transform.position - planet.transform.position).normalized;
+	            Grabbed.transform.forward = vectorFromPlanet;
 
-	    if (Input.GetMouseButtonUp(0)) {
-	        Release(planet);
+                if (Input.GetMouseButtonUp(0)) {
+	                Release(planet);
+	            }
+	        }
 	    }
 	}
 

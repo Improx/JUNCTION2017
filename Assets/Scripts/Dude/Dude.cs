@@ -74,6 +74,7 @@ public class Dude : MonoBehaviour
         _highlighted = false;
         SetState(DudeState.Walking);
         FindNewTarget();
+        _movement.AlignWithPlanet(_movement.Planet);
     }
 
     public void SetState(DudeState state) {
@@ -101,7 +102,8 @@ public class Dude : MonoBehaviour
         }
     }
 
-    private void FindNewTarget(){
+    private void FindNewTarget() {
+        if (State == DudeState.Grabbed) return;
 		_target = MeltableBase.GetClosestMeltable (transform.position);
         
         if (_target == null){
@@ -112,7 +114,8 @@ public class Dude : MonoBehaviour
         }
 
 		_movement.SetTarget (_target);
-		_target.OnMelted.AddListener (FindNewTarget);
+
+        _target.OnMelted.AddListener (FindNewTarget);
 	}
 
 	private void Melt(){

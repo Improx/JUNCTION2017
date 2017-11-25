@@ -2,9 +2,6 @@
 using UnityEngine.Events;
 
 public class DudeMovement : MonoBehaviour {
-
-	[SerializeField]
-	private Planet _planet;
 	[SerializeField]
 	private float _movementSpeed = 10f;
 	[SerializeField]
@@ -16,31 +13,33 @@ public class DudeMovement : MonoBehaviour {
 
 	public UnityEvent OnReachedTarget = new UnityEvent();
 
-	private void Start() {
-	    _dude = GetComponent<Dude>();
-		_planet = FindObjectOfType<Planet>();
-		_meshRadius = _planet.GetComponentInChildren<MeshFilter> ().mesh.bounds.size.x * 0.5f;
+    public Planet Planet { get; private set; }
 
-		AlignWithPlanet(_planet);
+    private void Start() {
+	    _dude = GetComponent<Dude>();
+
+		AlignWithPlanet(FindObjectOfType<Planet>());
 	}
 
 	void Update() {
 		MoveToTarget ();
-	}
+    }
 
-	private void AlignWithPlanet(Planet targetPlanet){
-		var _vectorToPlanet = (targetPlanet.transform.position - transform.position).normalized;
-		transform.rotation = Quaternion.LookRotation (-_vectorToPlanet, transform.right);
-	}
+    public void AlignWithPlanet(Planet targetPlanet) {
+        Planet = targetPlanet;
+        _meshRadius = Planet.GetComponentInChildren<MeshFilter>().mesh.bounds.size.x * 0.5f;
+        var vectorToPlanet = (targetPlanet.transform.position - transform.position).normalized;
+        transform.rotation = Quaternion.LookRotation(-vectorToPlanet, transform.right);
+    }
 
-	private void MoveToTarget() {
+    private void MoveToTarget() {
 	    if (_dude.State != Dude.DudeState.Walking) return;
         if (_target == null) {
 			return;
 		}
 
-		Vector3 axis = Vector3.Cross (_target.transform.position - transform.position, _planet.transform.position - transform.position);
-		transform.RotateAround (_planet.transform.position, axis.normalized, _movementSpeed * Time.deltaTime);
+		Vector3 axis = Vector3.Cross (_target.transform.position - transform.position, Planet.transform.position - transform.position);
+		transform.RotateAround (Planet.transform.position, axis.normalized, _movementSpeed * Time.deltaTime);
 
 		_distanceToTarget = Vector3.Distance (transform.position, _target.transform.position);
 
