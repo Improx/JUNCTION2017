@@ -55,12 +55,18 @@ public class DudeMovement : MonoBehaviour {
 			return;
 		}
 
-		var axis = Vector3.Cross (_target.transform.position - transform.position, Planet.transform.position - transform.position);
+		Vector3 axis = Vector3.Cross ((_target.transform.position - transform.position).normalized, (Planet.transform.position - transform.position).normalized);
 		transform.RotateAround (Planet.transform.position, axis.normalized, _movementSpeed * Time.deltaTime);
 
-		_distanceToTarget = Vector3.Distance (transform.position, _target.transform.position);
+		_vectorToTarget = _target.transform.position - transform.position;
+		
+		var vectorToPlanet = (Planet.transform.position - transform.position).normalized;
+		var _facingVec = Vector3.Cross(vectorToPlanet, axis.normalized).normalized;
 
 		if (_distanceToTarget <= _target.GetRadius() + Planet.Radius) {
+		transform.rotation = Quaternion.LookRotation(_facingVec, -vectorToPlanet);
+		
+		if (_vectorToTarget.magnitude <= _target.GetRadius() + _meshRadius) {
 			_target = null;
 			OnReachedTarget.Invoke ();
 		}
