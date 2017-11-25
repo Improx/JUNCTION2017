@@ -3215,6 +3215,10 @@ Prefab:
       value: 
       objectReference: {fileID: 4416845062560716, guid: 03c74946ada684f7bbafe92d25f75efe,
         type: 2}
+    - target: {fileID: 1804973083520070, guid: 9e5ba873228be47c1935e4dd2c70d62f, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9e5ba873228be47c1935e4dd2c70d62f, type: 2}
   m_IsPrefabParent: 0
@@ -3258,7 +3262,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 5899b051f5c2b497e80071756667ce28, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.65
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -3314,7 +3318,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -6936,7 +6940,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scoreTexts:
   - {fileID: 1114244493}
-  - {fileID: 1986238758}
+  - {fileID: 0}
   _pointsPerSecond: 1
 --- !u!114 &1114244493
 MonoBehaviour:
@@ -11563,12 +11567,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1930327063}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1986238758 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114486049381981246, guid: 935133bda84dc43508392128c7b3b6ba,
-    type: 2}
-  m_PrefabInternal: {fileID: 997823209}
-  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1 &2005334473
 GameObject:
   m_ObjectHideFlags: 0
