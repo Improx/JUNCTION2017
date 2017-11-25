@@ -11,7 +11,7 @@ public abstract class MeltableBase : MonoBehaviour {
 
 	[SerializeField]
 	private Planet _planet;
-	[SerializeField]
+
 	private GameManager _gameManager;
 
 	private Vector3 _vectorToPlanet;
@@ -46,6 +46,9 @@ public abstract class MeltableBase : MonoBehaviour {
 		_meshFilter = GetComponentInChildren<MeshFilter> ();
 
 		AlignWithPlanet(_planet);
+
+	    _gameManager = FindObjectOfType<GameManager>();
+
 	}
 
 	private void AlignWithPlanet(Planet targetPlanet){
