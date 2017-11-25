@@ -17,7 +17,7 @@ public class Dude : MonoBehaviour
 
     public DudeState State { get; private set; }
 
-	private MovementOnSphere _movement;
+	private DudeMovement _movement;
     private MeltableBase _target;
     private Animator _animator;
     [SerializeField]
@@ -27,7 +27,7 @@ public class Dude : MonoBehaviour
 	    //_renderer = GetComponentInChildren<Renderer>();
 	    //_defaultMaterial = _renderer.material;
 
-		_movement = GetComponent<MovementOnSphere> ();
+		_movement = GetComponent<DudeMovement> ();
 		_movement.OnReachedTarget.AddListener (Melt);
 	    _animator = GetComponentInChildren<Animator>();
 

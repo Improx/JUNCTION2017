@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
-public class MovementOnSphere : MonoBehaviour {
+public class DudeMovement : MonoBehaviour {
 
 	[SerializeField]
 	private Planet _planet;
