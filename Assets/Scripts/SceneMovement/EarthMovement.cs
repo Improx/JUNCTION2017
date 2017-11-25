@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Assertions.Comparers;
-using UnityEngine.Experimental.UIElements;
+﻿using UnityEngine;
 using static UnityEngine.Mathf;
 
 public class EarthMovement : MonoBehaviour
