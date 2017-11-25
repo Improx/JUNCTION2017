@@ -6793,7 +6793,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MainCamera: {fileID: 742789958}
   Planet: {fileID: 731854465}
-  MinDistance: 5
+  MinDistance: 10
   MaxDistance: 100
   RotSpeed: 50
   ScrollSpeed: 10
@@ -6808,7 +6808,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b842eecdc667ff3449c3d8833db5aa26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Planet: {fileID: 0}
 --- !u!4 &1263565392
 Transform:
   m_ObjectHideFlags: 0
