@@ -4,7 +4,7 @@ using UnityEngine.Events;
 public class MovementOnSphere : MonoBehaviour {
 
 	[SerializeField]
-	private GameObject _planet;
+	private Planet _planet;
 	[SerializeField]
 	private float _movementSpeed = 10f;
 	[SerializeField]
@@ -18,11 +18,19 @@ public class MovementOnSphere : MonoBehaviour {
 
 	private void Start() {
 	    _dude = GetComponent<Dude>();
+		_planet = FindObjectOfType<Planet>();
 		_meshRadius = _planet.GetComponentInChildren<MeshFilter> ().mesh.bounds.size.x * 0.5f;
+
+		AlignWithPlanet(_planet);
 	}
 
 	void Update() {
 		MoveToTarget ();
+	}
+
+	private void AlignWithPlanet(Planet targetPlanet){
+		var _vectorToPlanet = (targetPlanet.transform.position - transform.position).normalized;
+		transform.rotation = Quaternion.LookRotation (-_vectorToPlanet, transform.right);
 	}
 
 	private void MoveToTarget() {
