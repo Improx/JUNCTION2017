@@ -698,7 +698,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0cb3d33dbf1043928875eb06ea822e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _planet: {fileID: 0}
   _movementSpeed: 19.75
   _target: {fileID: 0}
   OnReachedTarget:
