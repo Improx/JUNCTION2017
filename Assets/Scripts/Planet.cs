@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 
-public class Planet : MonoBehaviour {
+public class Planet : MonoBehaviour
+{
+    public GameObject Highlight;
 
 	private float _radius;
 	public float Radius {
