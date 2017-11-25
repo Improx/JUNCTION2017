@@ -19,11 +19,11 @@ public abstract class MeltableBase : MonoBehaviour {
 
 	public static MeltableBase GetClosestMeltable(Vector3 position){
 
-		float closestDistance = Mathf.Infinity;
+		var closestDistance = Mathf.Infinity;
 		MeltableBase closestMeltable = null;
 
 		foreach (var meltable in MeltableBase.meltables) {
-			float distance = Vector3.Distance (position, meltable.transform.position);
+			var distance = Vector3.Distance (position, meltable.transform.position);
 			if (distance < closestDistance) {
 				closestDistance = distance;
 				closestMeltable = meltable;
@@ -63,7 +63,7 @@ public abstract class MeltableBase : MonoBehaviour {
 		
 
 	private void UpdateSize(){
-		Vector3 temp = transform.localScale;
+		var temp = transform.localScale;
 		temp.z = _startingScale.z * (_currentHealth / _startingHealth);
 		transform.localScale = temp;
 	}
