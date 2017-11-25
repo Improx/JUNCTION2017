@@ -1,17 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using UnityEngine;
 
 public class DudeViveGrab : MonoBehaviour
 {
     public Transform GrabPoint;
     public Animator AnimationController;
+    public float PlanetSnapDistance = 5f;
 
     public Dude Grabbed { get; private set; }
 
     private SteamVR_TrackedController _controller;
 
     private Dude _lastCollided;
+
+    private Planet _closestPlanet;
     // Use this for initialization
     void Start ()
 	{
@@ -29,8 +33,27 @@ public class DudeViveGrab : MonoBehaviour
 	}
 
     // Update is called once per frame
-    void Update () {
+    void LateUpdate () {
+        if (!Grabbed) return;
 
+        _closestPlanet = null;
+        foreach (var planet in FindObjectsOfType<Planet>()) {
+            var distance = Vector3.Distance(transform.position, planet.transform.position) - planet.Radius;
+
+            if (!(distance < PlanetSnapDistance)) continue;
+
+            if (_closestPlanet != null) {
+                var oldDistance = Vector3.Distance(transform.position, _closestPlanet.transform.position) - _closestPlanet.Radius;
+
+                if (oldDistance > distance) continue;
+            }
+
+            _closestPlanet = planet;
+        }
+
+        if (_closestPlanet != null) {
+            _closestPlanet.Highlight.SetActive(true);
+        }
     }
 
     public bool Grab(Dude dude)
@@ -48,26 +71,36 @@ public class DudeViveGrab : MonoBehaviour
         Grabbed.transform.position = GrabPoint.position;
         Grabbed.transform.rotation = GrabPoint.rotation;
         Grabbed.transform.SetParent(GrabPoint);
+
         return true;
     }
 
     public void Release()
     {
         if (!Grabbed) return;
-        foreach (var col in Grabbed.GetComponentsInChildren<Collider>())
+        if (_closestPlanet)
         {
-            col.enabled = true;
-        }
-        Grabbed.transform.SetParent(null);
-        Grabbed.Release(FindObjectOfType<Planet>());
+            foreach (var col in Grabbed.GetComponentsInChildren<Collider>())
+            {
+                col.enabled = true;
+            }
 
-        AnimationController.SetBool("Grabbed", false);
-        Grabbed = null;
+            Grabbed.transform.SetParent(_closestPlanet.transform);
+            Grabbed.Release(_closestPlanet);
+
+            AnimationController.SetBool("Grabbed", false);
+            Grabbed = null;
+
+            if (_closestPlanet)
+            {
+                _closestPlanet.Highlight.SetActive(false);
+                _closestPlanet = null;
+            }
+        }
     }
 
     private void SetCollidingObject(Collider other) {
         if (Grabbed) return;
-
 
         if (other.attachedRigidbody == null) return;
         var dude = other.attachedRigidbody.GetComponent<Dude>();

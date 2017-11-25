@@ -74,7 +74,9 @@ public class Dude : MonoBehaviour
         //_renderer.material = _defaultMaterial;
         _highlighted = false;
         SetState(DudeState.Falling);
-        //_movement.AlignWithPlanet(_movement.Planet);
+        if (planet) {
+            _movement.AlignWithPlanet(_movement.Planet);
+        }
     }
 
     public void SetState(DudeState state) {
@@ -124,7 +126,7 @@ public class Dude : MonoBehaviour
         }
     }
 
-    private void FindNewTarget() {
+    public void FindNewTarget() {
         if (State == DudeState.Grabbed) return;
 		_target = MeltableBase.GetClosestMeltable (transform.position);
         
