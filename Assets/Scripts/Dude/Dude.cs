@@ -74,6 +74,7 @@ public class Dude : MonoBehaviour
         _highlighted = false;
         SetState(DudeState.Walking);
         FindNewTarget();
+        _movement.AlignWithPlanet(_movement.Planet);
     }
 
     public void SetState(DudeState state) {
@@ -108,7 +109,8 @@ public class Dude : MonoBehaviour
 			return;
 
 		_movement.SetTarget (_target);
-		_target.OnMelted.AddListener (FindNewTarget);
+
+        _target.OnMelted.AddListener (FindNewTarget);
 	}
 
 	private void Melt(){
