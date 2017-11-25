@@ -103,9 +103,13 @@ public class Dude : MonoBehaviour
 
     private void FindNewTarget(){
 		_target = MeltableBase.GetClosestMeltable (transform.position);
-        SetState(DudeState.Walking);
-        if (_target == null)
+        
+        if (_target == null){
+            SetState(DudeState.Idle);
 			return;
+        }else{
+            SetState(DudeState.Walking);
+        }
 
 		_movement.SetTarget (_target);
 		_target.OnMelted.AddListener (FindNewTarget);

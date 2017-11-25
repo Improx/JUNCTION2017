@@ -9,14 +9,21 @@ public class Comet : MonoBehaviour, ISpaceObject {
 	[SerializeField] private float _minFlyForce = 100f;
 	[SerializeField] private float _maxFlyForce = 300f;
 
+	private Rigidbody _rb;
+
+	private void Awake(){
+		_rb = GetComponentInChildren<Rigidbody>();
+		
+	}
+
 	public void StartFlyingTowards(Transform target){
 		Vector3 vecToPlanet = (target.position - transform.position).normalized;
 		Debug.DrawRay(transform.position, vecToPlanet * 10000f, Color.red, 10000f);
-		GetComponent<Rigidbody>().AddForce(vecToPlanet * Random.Range(_minFlyForce, _maxFlyForce));
+		_rb.AddForce(vecToPlanet * Random.Range(_minFlyForce, _maxFlyForce));
 
 		float randomTorque = Random.Range(minTorque, maxTorque);
 		Vector3 torque = new Vector3(randomTorque, randomTorque, randomTorque);
-		GetComponent<Rigidbody>().AddTorque(torque);
+		_rb.AddTorque(torque);
 	}
 
 	private void OnCollisionEnter(Collision collision){
