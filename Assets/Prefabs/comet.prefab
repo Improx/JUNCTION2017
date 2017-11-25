@@ -193,6 +193,8 @@ MonoBehaviour:
   maxTorque: 30
   _minFlyForce: 100
   _maxFlyForce: 300
+  _hitExplosion: {fileID: 114781948276404384, guid: 09155bc6c7eb40b469b54060386a3d4a,
+    type: 2}
 --- !u!135 &135322929742849538
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -9,6 +9,8 @@ public class Comet : MonoBehaviour, ISpaceObject {
 	[SerializeField] private float _minFlyForce = 100f;
 	[SerializeField] private float _maxFlyForce = 300f;
 
+	[SerializeField] private Explosion _hitExplosion;
+
 	private Rigidbody _rb;
 
 	private void Awake(){
@@ -35,5 +37,8 @@ public class Comet : MonoBehaviour, ISpaceObject {
 		}
 
 		Destroy(gameObject);
+
+		GameObject exp = Instantiate(_hitExplosion.gameObject, transform.position, Quaternion.identity);
+		exp.GetComponent<Explosion>().Explode(60);
 	}
 }
