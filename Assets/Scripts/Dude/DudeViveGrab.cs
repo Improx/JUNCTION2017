@@ -28,6 +28,10 @@ public class DudeViveGrab : MonoBehaviour
 		Release ();
 	}
 
+    private void _controller_TriggerUnClicked(object sender, ClickedEventArgs e) {
+        Release();
+    }
+
     // Update is called once per frame
     void Update () {
 
