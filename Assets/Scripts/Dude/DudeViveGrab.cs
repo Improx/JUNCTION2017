@@ -40,6 +40,9 @@ public class DudeViveGrab : MonoBehaviour
         }
 
         AnimationController.SetBool("Grabbed", true);
+        Grabbed.Grab();
+        Grabbed.transform.position = GrabPoint.position;
+        Grabbed.transform.rotation = GrabPoint.rotation;
         Grabbed.transform.SetParent(GrabPoint);
         return true;
     }
@@ -54,6 +57,7 @@ public class DudeViveGrab : MonoBehaviour
         Grabbed.transform.SetParent(null);
         Grabbed.Release();
 
+        AnimationController.SetBool("Grabbed", false);
         Grabbed = null;
     }
 

@@ -5,8 +5,8 @@ public class Dude : MonoBehaviour
     public Material HightligtMaterial;
 
 
-    private Renderer _renderer;
-    private Material _defaultMaterial;
+    //private Renderer _renderer;
+    //private Material _defaultMaterial;
     private bool _highlighted = false;
     public enum DudeState {
         Idle,
@@ -24,8 +24,8 @@ public class Dude : MonoBehaviour
 	private float _dps = 1;
 
 	void Start () {
-	    _renderer = GetComponentInChildren<Renderer>();
-	    _defaultMaterial = _renderer.material;
+	    //_renderer = GetComponentInChildren<Renderer>();
+	    //_defaultMaterial = _renderer.material;
 
 		_movement = GetComponent<MovementOnSphere> ();
 		_movement.OnReachedTarget.AddListener (Melt);
@@ -53,20 +53,24 @@ public class Dude : MonoBehaviour
 
     void OnMouseEnter() {
         if (DudeMouseGrab.Instance.Grabbed) return;
-        _renderer.material = HightligtMaterial;
+        //_renderer.material = HightligtMaterial;
         _highlighted = true;
     }
 	
 
     void OnMouseExit() {
         if (DudeMouseGrab.Instance.Grabbed) return;
-        _renderer.material = _defaultMaterial;
+        //_renderer.material = _defaultMaterial;
         _highlighted = false;
     }
 
+    public void Grab()
+    {
+        SetState(DudeState.Grabbed);
+    }
     public void Release()
     {
-        _renderer.material = _defaultMaterial;
+        //_renderer.material = _defaultMaterial;
         _highlighted = false;
         SetState(DudeState.Walking);
         FindNewTarget();
