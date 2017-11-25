@@ -20,9 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4159882804198278}
   - component: {fileID: 33445325722884104}
-  - component: {fileID: 135388338167991358}
   - component: {fileID: 23133720651661226}
-  - component: {fileID: 114587167822254656}
   m_Layer: 0
   m_Name: Icecap
   m_TagString: Untagged
@@ -36,13 +34,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1407814705442442}
-  m_LocalRotation: {x: 0.97311276, y: 0.013843434, z: 0.06075202, w: 0.22174105}
-  m_LocalPosition: {x: 0.01, y: -0.229, z: -0.37}
-  m_LocalScale: {x: 0.8264152, y: 0.826415, z: 0.826415}
+  m_LocalRotation: {x: -0.96582896, y: 0.02062163, z: 0.23991369, w: 0.09586746}
+  m_LocalPosition: {x: -1.4780023, y: 2.648428, z: -6.4587326}
+  m_LocalScale: {x: 450.7426, y: 450.74268, z: 450.74268}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 154.54, y: -7.9179993, z: -3.42099}
+  m_LocalEulerAnglesHint: {x: -168.751, y: 27.93599, z: -0.35998535}
 --- !u!23 &23133720651661226
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -57,7 +55,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 00ecf193c3ebb484598205032c2f3f3f, type: 2}
+  - {fileID: 2100000, guid: ec9ea70a6bef54bbe97ab7c3bad64d0b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -65,7 +63,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_PreserveUVs: 1
+  m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 0
@@ -83,33 +81,4 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1407814705442442}
-  m_Mesh: {fileID: 4300000, guid: 2b0a21fa484b2495abc569e945abaeaa, type: 3}
---- !u!114 &114587167822254656
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1407814705442442}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 634de3c934f2845ebab5bcda3f162299, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _planet: {fileID: 0}
-  OnMelted:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
---- !u!135 &135388338167991358
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1407814705442442}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Mesh: {fileID: 4300000, guid: 2873b5f87b338449585e61b44ed523e0, type: 3}
