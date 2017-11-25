@@ -83,14 +83,11 @@ public class Dude : MonoBehaviour
     }
 
     public void SetState(DudeState state) {
-
-        if(State != state){
-            EnterState(state);
-        }
-
+        State = state;
         switch (State)
         {
             case DudeState.Melting:
+                _weapon.SetActive(true);
                 _animator.SetBool("Walking", false);
                 _animator.SetBool("Struggle", false);
                 break;
@@ -110,18 +107,6 @@ public class Dude : MonoBehaviour
             case DudeState.Falling:
                 _animator.SetBool("Walking", false);
                 _animator.SetBool("Struggle", false);
-                break;
-            default:
-                break;
-        }
-    }
-
-    private void EnterState(DudeState state){
-        State = state;
-
-        switch(state){
-            case DudeState.Melting:
-                _weapon.SetActive(true);
                 break;
             default:
                 _weapon.SetActive(false);
