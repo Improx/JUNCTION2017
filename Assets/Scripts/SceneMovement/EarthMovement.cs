@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Assertions.Comparers;
-using UnityEngine.Experimental.UIElements;
-using static UnityEngine.Mathf;
+﻿using UnityEngine;
 
 public class EarthMovement : MonoBehaviour
 {
@@ -23,7 +17,7 @@ public class EarthMovement : MonoBehaviour
     void Start () {
         MainCamera.transform.LookAt(transform);
         _planetRadius = Planet.GetComponent<SphereCollider>().radius;
-        _nextDistance = Min(MaxDistance, Max(MinDistance, Vector3.Distance(MainCamera.transform.position, Planet.transform.position) - _planetRadius));
+        _nextDistance = Mathf.Min(MaxDistance, Mathf.Max(MinDistance, Vector3.Distance(MainCamera.transform.position, Planet.transform.position) - _planetRadius));
     }
 	
 	// Update is called once per frame
@@ -31,8 +25,8 @@ public class EarthMovement : MonoBehaviour
     {
         if (Input.GetMouseButton(1))
         {
-            var rotX = Input.GetAxis("Mouse X") * RotSpeed * Deg2Rad;
-            var rotY = Input.GetAxis("Mouse Y") * RotSpeed * Deg2Rad;
+            var rotX = Input.GetAxis("Mouse X") * RotSpeed * Mathf.Deg2Rad;
+            var rotY = Input.GetAxis("Mouse Y") * RotSpeed * Mathf.Deg2Rad;
             MainCamera.transform.LookAt(transform);
             transform.Rotate(Vector3.up, rotX, Space.World);
 
@@ -43,12 +37,12 @@ public class EarthMovement : MonoBehaviour
 
 
         _nextDistance += scroll * ScrollSpeed;
-        _nextDistance = Min(MaxDistance, Max(MinDistance, _nextDistance));
+        _nextDistance = Mathf.Min(MaxDistance, Mathf.Max(MinDistance, _nextDistance));
     }
 
     void FixedUpdate() {
         var vecFromPlanet = (MainCamera.transform.position - Planet.transform.position).normalized;
         var distance = Vector3.Distance(MainCamera.transform.position, Planet.transform.position) - _planetRadius;
-        MainCamera.transform.position = Planet.transform.position + vecFromPlanet * (_planetRadius + Min(MaxDistance, Max(MinDistance, distance + (_nextDistance - distance) * Time.deltaTime * ScrollSpeed)));
+        MainCamera.transform.position = Planet.transform.position + vecFromPlanet * (_planetRadius + Mathf.Min(MaxDistance, Mathf.Max(MinDistance, distance + (_nextDistance - distance) * Time.deltaTime * ScrollSpeed)));
     }
 }
