@@ -21,13 +21,14 @@ public class Dude : MonoBehaviour
 	private DudeMovement _movement;
     private MeltableBase _target;
     private Animator _animator;
+	private AudioSource _audio;
     [SerializeField]
 	private float _dps = 1;
 
 	void Start () {
 	    //_renderer = GetComponentInChildren<Renderer>();
 	    //_defaultMaterial = _renderer.material;
-
+		_audio = GetComponent<AudioSource>();
 		_movement = GetComponent<DudeMovement> ();
 		_movement.OnReachedTarget.AddListener (Melt);
 	    _animator = GetComponentInChildren<Animator>();
@@ -42,14 +43,6 @@ public class Dude : MonoBehaviour
 	        SetState(DudeState.Grabbed);
             _highlighted = false;
         }
-		switch (State)
-		{
-		    case DudeState.Melting:
-		        _target.AddHealth(-_dps);
-		        break;
-            default:
-			    break;
-		}
 	}
 
     void OnMouseEnter() {
@@ -84,6 +77,7 @@ public class Dude : MonoBehaviour
             case DudeState.Melting:
                 _animator.SetBool("Walking", false);
                 _animator.SetBool("Struggle", false);
+				_target.AddHealth(-_dps);
                 break;
             case DudeState.Walking:
                 _animator.SetBool("Walking", true);
@@ -96,6 +90,7 @@ public class Dude : MonoBehaviour
             case DudeState.Grabbed:
                 _animator.SetBool("Walking", false);
                 _animator.SetBool("Struggle", true);
+				_audio.Play ();
                 break;
             case DudeState.Falling:
                 _animator.SetBool("Walking", false);
