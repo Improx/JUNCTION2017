@@ -14,6 +14,7 @@ public class Planet : MonoBehaviour
 		}
 	}
 
-	void Start(){
-	}
+	void Update() {
+	   Highlight.SetActive(false);
+    }
 }
