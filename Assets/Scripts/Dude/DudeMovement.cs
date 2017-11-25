@@ -8,8 +8,6 @@ public class DudeMovement : MonoBehaviour {
     private float _fallingSpeed = 1f;
     [SerializeField]
 	private MeltableBase _target;
-	private float _distanceToTarget = 0;
-    
     private Dude _dude;
 
 	public UnityEvent OnReachedTarget = new UnityEvent();
