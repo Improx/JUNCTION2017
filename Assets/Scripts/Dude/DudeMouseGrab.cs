@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class DudeMouseGrab : MonoBehaviour
 {
+    public float DropDistance = 2f;
+
     public Dude Grabbed { get; private set; }
 
     public static DudeMouseGrab Instance { get; private set; }
@@ -27,39 +29,38 @@ public class DudeMouseGrab : MonoBehaviour
 	    RaycastHit hit;
 	    if (Physics.Raycast(ray, out hit)) {
 	        if (hit.rigidbody && hit.rigidbody.GetComponent<Planet>()) {
-	            var planet = hit.rigidbody.GetComponent<Planet>();
+                var planet = hit.rigidbody.GetComponent<Planet>();
 
-	            Grabbed.transform.position = hit.point;
 
 	            var vectorFromPlanet = (Grabbed.transform.position - planet.transform.position).normalized;
-	            Grabbed.transform.forward = vectorFromPlanet;
+
+	            Grabbed.transform.position = hit.point + vectorFromPlanet * DropDistance;
+                Grabbed.transform.up = vectorFromPlanet;
 
                 if (Input.GetMouseButtonUp(0)) {
-	                Release(planet);
+                    Release(planet);
 	            }
 	        }
 	    }
 	}
 
-    public bool Grab(Dude dude)
-    {
+    public bool Grab(Dude dude) {
         if (Grabbed) return false;
 
         Grabbed = dude;
-        foreach (var col in Grabbed.GetComponentsInChildren<Collider>())
-        {
+        foreach (var col in Grabbed.GetComponentsInChildren<Collider>()) {
             col.enabled = false;
         }
         return true;
     }
 
-    public void Release(Planet planet)
-    {
+    public void Release(Planet planet)  {
         if (!Grabbed) return;
         foreach (var col in Grabbed.GetComponentsInChildren<Collider>()) {
             col.enabled = true;
         }
-        Grabbed.Release();
+        Grabbed.Release(planet);
+
 
         Grabbed = null;
     }

@@ -16,7 +16,7 @@ public class EarthMovement : MonoBehaviour
     // Use this for initialization
     void Start () {
         MainCamera.transform.LookAt(transform);
-        _planetRadius = Planet.GetComponentInChildren<SphereCollider>().radius;
+        _planetRadius = Planet.Radius;
         _nextDistance = Mathf.Min(MaxDistance, Mathf.Max(MinDistance, Vector3.Distance(MainCamera.transform.position, Planet.transform.position) - _planetRadius));
     }
 	
