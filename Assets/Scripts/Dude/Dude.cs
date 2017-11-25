@@ -5,29 +5,30 @@ public class Dude : MonoBehaviour
     public Material HightligtMaterial;
 
 
-    private Renderer _renderer;
-    private Material _defaultMaterial;
+    //private Renderer _renderer;
+    //private Material _defaultMaterial;
     private bool _highlighted = false;
     public enum DudeState {
         Idle,
         Walking,
         Grabbed,
-		Melting
+		Melting,
+        Falling
     }
 
     public DudeState State { get; private set; }
 
-	private MovementOnSphere _movement;
+	private DudeMovement _movement;
     private MeltableBase _target;
     private Animator _animator;
     [SerializeField]
 	private float _dps = 1;
 
 	void Start () {
-	    _renderer = GetComponentInChildren<Renderer>();
-	    _defaultMaterial = _renderer.material;
+	    //_renderer = GetComponentInChildren<Renderer>();
+	    //_defaultMaterial = _renderer.material;
 
-		_movement = GetComponent<MovementOnSphere> ();
+		_movement = GetComponent<DudeMovement> ();
 		_movement.OnReachedTarget.AddListener (Melt);
 	    _animator = GetComponentInChildren<Animator>();
 
@@ -53,23 +54,27 @@ public class Dude : MonoBehaviour
 
     void OnMouseEnter() {
         if (DudeMouseGrab.Instance.Grabbed) return;
-        _renderer.material = HightligtMaterial;
+        //_renderer.material = HightligtMaterial;
         _highlighted = true;
     }
 	
 
     void OnMouseExit() {
         if (DudeMouseGrab.Instance.Grabbed) return;
-        _renderer.material = _defaultMaterial;
+        //_renderer.material = _defaultMaterial;
         _highlighted = false;
     }
 
-    public void Release()
+    public void Grab()
     {
-        _renderer.material = _defaultMaterial;
+        SetState(DudeState.Grabbed);
+    }
+    public void Release(Planet planet)
+    {
+        //_renderer.material = _defaultMaterial;
         _highlighted = false;
-        SetState(DudeState.Walking);
-        FindNewTarget();
+        SetState(DudeState.Falling);
+        //_movement.AlignWithPlanet(_movement.Planet);
     }
 
     public void SetState(DudeState state) {
@@ -92,19 +97,29 @@ public class Dude : MonoBehaviour
                 _animator.SetBool("Walking", false);
                 _animator.SetBool("Struggle", true);
                 break;
+            case DudeState.Falling:
+                _animator.SetBool("Walking", false);
+                _animator.SetBool("Struggle", false);
+                break;
             default:
                 break;
         }
     }
 
-    private void FindNewTarget(){
+    private void FindNewTarget() {
+        if (State == DudeState.Grabbed) return;
 		_target = MeltableBase.GetClosestMeltable (transform.position);
-        SetState(DudeState.Walking);
-        if (_target == null)
+        
+        if (_target == null){
+            SetState(DudeState.Idle);
 			return;
+        }else{
+            SetState(DudeState.Walking);
+        }
 
 		_movement.SetTarget (_target);
-		_target.OnMelted.AddListener (FindNewTarget);
+
+        _target.OnMelted.AddListener (FindNewTarget);
 	}
 
 	private void Melt(){

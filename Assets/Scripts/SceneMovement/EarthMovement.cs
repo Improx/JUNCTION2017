@@ -3,7 +3,7 @@
 public class EarthMovement : MonoBehaviour
 {
     public Camera MainCamera;
-    public GameObject Planet;
+    public Planet Planet;
 
     public float MinDistance = 5f;
     public float MaxDistance = 100f;
@@ -16,7 +16,7 @@ public class EarthMovement : MonoBehaviour
     // Use this for initialization
     void Start () {
         MainCamera.transform.LookAt(transform);
-        _planetRadius = Planet.GetComponent<SphereCollider>().radius;
+        _planetRadius = Planet.Radius;
         _nextDistance = Mathf.Min(MaxDistance, Mathf.Max(MinDistance, Vector3.Distance(MainCamera.transform.position, Planet.transform.position) - _planetRadius));
     }
 	

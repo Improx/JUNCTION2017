@@ -8,11 +8,14 @@ public class SpawnObjectsAround : MonoBehaviour {
 	[SerializeField] private float maxSpawnDistance = 50f;
 
 	[SerializeField] private Transform _prefabToSpawn;
+	[SerializeField] private float _spawnRate = 20f;
 
 	private List<ISpaceObject> _spawnedObjects;
+	private ParticleSystem _trailSystem;
 
 	private void Start(){
-		Spawn();
+		_trailSystem = GetComponent<ParticleSystem>();
+		InvokeRepeating("Spawn", 0f, _spawnRate);
 	}
 
 	private void Spawn(){
@@ -21,7 +24,7 @@ public class SpawnObjectsAround : MonoBehaviour {
 		obj.SetParent(gameObject.transform, true);
 		obj.transform.position = pos;
 
-		ISpaceObject so = obj.GetComponent<ISpaceObject>();
+		ISpaceObject so = obj.GetComponentInChildren<ISpaceObject>();
 		print(so);
 		print(obj);
 		so.StartFlyingTowards(transform);
