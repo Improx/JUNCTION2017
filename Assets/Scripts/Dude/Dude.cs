@@ -45,6 +45,11 @@ public class Dude : MonoBehaviour
 	        SetState(DudeState.Grabbed);
             _highlighted = false;
         }
+
+		if (State == DudeState.Melting) {
+			_target.AddHealth(-_dps);
+		}
+		
 	}
 
     void OnMouseEnter() {
@@ -69,7 +74,9 @@ public class Dude : MonoBehaviour
         //_renderer.material = _defaultMaterial;
         _highlighted = false;
         SetState(DudeState.Falling);
-        //_movement.AlignWithPlanet(_movement.Planet);
+        if (planet) {
+            _movement.AlignWithPlanet(_movement.Planet);
+        }
     }
 
     public void SetState(DudeState state) {
@@ -83,7 +90,6 @@ public class Dude : MonoBehaviour
             case DudeState.Melting:
                 _animator.SetBool("Walking", false);
                 _animator.SetBool("Struggle", false);
-				_target.AddHealth(-_dps);
                 break;
             case DudeState.Walking:
                 _animator.SetBool("Walking", true);
@@ -120,7 +126,7 @@ public class Dude : MonoBehaviour
         }
     }
 
-    private void FindNewTarget() {
+    public void FindNewTarget() {
         if (State == DudeState.Grabbed) return;
 		_target = MeltableBase.GetClosestMeltable (transform.position);
         
