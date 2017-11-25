@@ -63,14 +63,13 @@ public class DudeMovement : MonoBehaviour {
 		var vectorToPlanet = (Planet.transform.position - transform.position).normalized;
 		var facingVec = Vector3.Cross(vectorToPlanet, axis.normalized).normalized;
 
-        if (_distanceToTarget <= _target.GetRadius() + Planet.Radius) {
-            transform.rotation = Quaternion.LookRotation(facingVec, -vectorToPlanet);
+		//Face towards movedir
+        transform.rotation = Quaternion.LookRotation(facingVec, -vectorToPlanet);
 
-            if (vectorToTarget.magnitude <= _target.GetRadius() + Planet.Radius) {
-                _target = null;
-                OnReachedTarget.Invoke();
-            }
-        }
+		if (vectorToTarget.magnitude <= _target.GetRadius()) {
+			_target = null;
+			OnReachedTarget.Invoke();
+		}
     }
     public void SetTarget(MeltableBase target)
     {
