@@ -24,9 +24,7 @@ public class SpawnObjectsAround : MonoBehaviour {
 		obj.SetParent(gameObject.transform, true);
 		obj.transform.position = pos;
 
-		ISpaceObject so = obj.GetComponentInChildren<ISpaceObject>();
-		print(so);
-		print(obj);
+		var so = obj.GetComponentInChildren<ISpaceObject>();
 		so.StartFlyingTowards(transform);
 	}
 }

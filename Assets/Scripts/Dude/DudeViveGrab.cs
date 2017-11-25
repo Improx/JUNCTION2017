@@ -10,7 +10,7 @@ public class DudeViveGrab : MonoBehaviour
     public float PlanetSnapDistance = 5f;
 
     public Dude Grabbed { get; private set; }
-    public Vector3 Velocity { get; private set; }
+    public Vector3 Velocity;
 
     private SteamVR_TrackedController _controller;
 
@@ -35,8 +35,8 @@ public class DudeViveGrab : MonoBehaviour
 		Release ();
 	}
 
-    void Update() {
-        Velocity = transform.position - _lastPosition;
+    void FixedUpdate() {
+        Velocity = (transform.position - _lastPosition) /Time.fixedDeltaTime;
 
         _lastPosition = transform.position;
     }
@@ -83,28 +83,30 @@ public class DudeViveGrab : MonoBehaviour
         return true;
     }
 
-    public void Release()
-    {
+    public void Release() {
         if (!Grabbed) return;
-        if (_closestPlanet)
+
+        foreach (var col in Grabbed.GetComponentsInChildren<Collider>())
         {
-            foreach (var col in Grabbed.GetComponentsInChildren<Collider>())
-            {
-                col.enabled = true;
-            }
+            col.enabled = true;
+        }
+
+        if (_closestPlanet) {
 
             Grabbed.transform.SetParent(_closestPlanet.transform);
             Grabbed.Release(_closestPlanet);
 
-            AnimationController.SetBool("Grabbed", false);
-            Grabbed = null;
-
-            if (_closestPlanet)
-            {
+            if (_closestPlanet) {
                 _closestPlanet.Highlight.SetActive(false);
                 _closestPlanet = null;
             }
+        } else {
+            Grabbed.transform.SetParent(null);
+            Grabbed.Throw(Velocity);
         }
+
+        AnimationController.SetBool("Grabbed", false);
+        Grabbed = null;
     }
 
     private void SetCollidingObject(Collider other) {
@@ -113,7 +115,6 @@ public class DudeViveGrab : MonoBehaviour
         if (other.attachedRigidbody == null) return;
         var dude = other.attachedRigidbody.GetComponent<Dude>();
         if (!dude) return;
-        print(dude);
         _lastCollided = dude;
     }
     

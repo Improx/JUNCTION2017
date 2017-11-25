@@ -27,11 +27,14 @@ public class Dude : MonoBehaviour
     [SerializeField]
     private GameObject _weapon;
 
-	void Start () {
-	    //_renderer = GetComponentInChildren<Renderer>();
-	    //_defaultMaterial = _renderer.material;
-		_audio = GetComponent<AudioSource>();
-		_movement = GetComponent<DudeMovement> ();
+    private Rigidbody _rigidbody;
+
+    void Start () {
+        //_renderer = GetComponentInChildren<Renderer>();
+        //_defaultMaterial = _renderer.material;
+	    _audio = GetComponent<AudioSource>();
+	    _rigidbody = GetComponent<Rigidbody>();
+        _movement = GetComponent<DudeMovement> ();
 		_movement.OnReachedTarget.AddListener (Melt);
 	    _animator = GetComponentInChildren<Animator>();
 
@@ -130,10 +133,10 @@ public class Dude : MonoBehaviour
         if (State == DudeState.Grabbed) return;
 		_target = MeltableBase.GetClosestMeltable (transform.position);
         
-        if (_target == null){
+        if (_target == null) {
             SetState(DudeState.Idle);
 			return;
-        }else{
+        } else {
             SetState(DudeState.Walking);
         }
 
@@ -142,9 +145,13 @@ public class Dude : MonoBehaviour
         _target.OnMelted.AddListener (FindNewTarget);
 	}
 
-	private void Melt(){
+	private void Melt() {
 	    SetState(DudeState.Melting);
         _weapon.SetActive(true);
     }
 
+    public void Throw(Vector3 velocity) {
+        _rigidbody.velocity = velocity;
+        _rigidbody.isKinematic = false;
+    }
 }
