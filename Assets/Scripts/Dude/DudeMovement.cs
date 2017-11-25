@@ -26,17 +26,18 @@ public class DudeMovement : MonoBehaviour {
     }
 
     private void DropToPlanet() {
-        if (_dude.State == Dude.DudeState.Grabbed || !Planet) return;
+        if (_dude.State != Dude.DudeState.Falling || !Planet) return;
 
         var distance = Vector3.Distance(transform.position, Planet.transform.position);
 
-        if (!(distance > Planet.Radius)) return;
-
-        if (_dude.State != Dude.DudeState.Falling)  {
-            _dude.SetState(Dude.DudeState.Falling);
-        }
-
         var vectorFromPlanet = (transform.position - Planet.transform.position).normalized;
+        if (distance < Planet.Radius) {
+            if (_dude.State == Dude.DudeState.Falling) {
+                transform.position = Planet.transform.position + vectorFromPlanet * Planet.Radius;
+                _dude.SetState(Dude.DudeState.Idle);
+                _dude.FindNewTarget();
+            }
+        }
         
         transform.position = Planet.transform.position + vectorFromPlanet * (distance - Time.deltaTime * _fallingSpeed);
     }
@@ -44,7 +45,7 @@ public class DudeMovement : MonoBehaviour {
     public void AlignWithPlanet(Planet targetPlanet) {
         Planet = targetPlanet;
         var vectorFromPlanet = (transform.position - Planet.transform.position).normalized;
-        transform.rotation = Quaternion.LookRotation(vectorFromPlanet, transform.right);
+        transform.rotation = Quaternion.LookRotation(vectorFromPlanet, transform.up);
     }
 
     private void MoveToTarget() {

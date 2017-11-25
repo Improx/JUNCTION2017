@@ -4,8 +4,9 @@ using UnityEngine.Events;
 
 public abstract class MeltableBase : MonoBehaviour {
 
-	private float _startingHealth = 100;
-	private float _currentHealth;
+    [SerializeField]
+    protected float StartingHealth = 100;
+    protected float CurrentHealth;
 	private Vector3 _startingScale;
 	private MeshFilter _meshFilter;
 
@@ -41,7 +42,7 @@ public abstract class MeltableBase : MonoBehaviour {
 	}
 
 	void Start(){
-		_currentHealth = _startingHealth;
+		CurrentHealth = StartingHealth;
 		_startingScale = transform.localScale;
 		_meshFilter = GetComponentInChildren<MeshFilter> ();
 
@@ -57,10 +58,10 @@ public abstract class MeltableBase : MonoBehaviour {
 	}
 
 	public void AddHealth(float amount){
-		_currentHealth += amount;
+		CurrentHealth += amount;
 		UpdateSize ();
 
-		if (_currentHealth <= 0) {
+		if (CurrentHealth <= 0) {
 			Die ();
 		}
 	}
@@ -77,7 +78,7 @@ public abstract class MeltableBase : MonoBehaviour {
 
 	private void UpdateSize(){
 		var temp = transform.localScale;
-		temp.z = _startingScale.z * (_currentHealth / _startingHealth);
+		temp.z = _startingScale.z * (CurrentHealth / StartingHealth);
 		transform.localScale = temp;
 	}
 
