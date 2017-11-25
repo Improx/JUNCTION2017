@@ -10,12 +10,15 @@ public class DudeViveGrab : MonoBehaviour
     public float PlanetSnapDistance = 5f;
 
     public Dude Grabbed { get; private set; }
+    public Vector3 Velocity { get; private set; }
 
     private SteamVR_TrackedController _controller;
 
     private Dude _lastCollided;
 
     private Planet _closestPlanet;
+
+    private Vector3 _lastPosition;
     // Use this for initialization
     void Start ()
 	{
@@ -32,6 +35,11 @@ public class DudeViveGrab : MonoBehaviour
 		Release ();
 	}
 
+    void Update() {
+        Velocity = transform.position - _lastPosition;
+
+        _lastPosition = transform.position;
+    }
     // Update is called once per frame
     void LateUpdate () {
         if (!Grabbed) return;
