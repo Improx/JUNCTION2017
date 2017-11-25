@@ -68,7 +68,7 @@ public class Dude : MonoBehaviour
     {
         SetState(DudeState.Grabbed);
     }
-    public void Release()
+    public void Release(Planet planet)
     {
         //_renderer.material = _defaultMaterial;
         _highlighted = false;

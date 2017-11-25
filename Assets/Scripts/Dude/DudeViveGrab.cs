@@ -60,7 +60,7 @@ public class DudeViveGrab : MonoBehaviour
             col.enabled = true;
         }
         Grabbed.transform.SetParent(null);
-        Grabbed.Release();
+        Grabbed.Release(FindObjectOfType<Planet>());
 
         AnimationController.SetBool("Grabbed", false);
         Grabbed = null;
