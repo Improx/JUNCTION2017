@@ -6,7 +6,7 @@ public class DudeMovement : MonoBehaviour {
 	private float _movementSpeed = 10f;
 	[SerializeField]
 	private MeltableBase _target;
-	private float _distanceToTarget = 0;
+	private Vector3 _vectorToTarget;
 
 	private float _meshRadius = 0;
     private Dude _dude;
@@ -29,7 +29,7 @@ public class DudeMovement : MonoBehaviour {
         Planet = targetPlanet;
         _meshRadius = Planet.GetComponentInChildren<MeshFilter>().mesh.bounds.size.x * 0.5f;
         var vectorToPlanet = (targetPlanet.transform.position - transform.position).normalized;
-        transform.rotation = Quaternion.LookRotation(-vectorToPlanet, transform.right);
+        transform.up = -vectorToPlanet;
     }
 
     private void MoveToTarget() {
@@ -38,12 +38,17 @@ public class DudeMovement : MonoBehaviour {
 			return;
 		}
 
-		Vector3 axis = Vector3.Cross (_target.transform.position - transform.position, Planet.transform.position - transform.position);
+		Vector3 axis = Vector3.Cross ((_target.transform.position - transform.position).normalized, (Planet.transform.position - transform.position).normalized);
 		transform.RotateAround (Planet.transform.position, axis.normalized, _movementSpeed * Time.deltaTime);
 
-		_distanceToTarget = Vector3.Distance (transform.position, _target.transform.position);
+		_vectorToTarget = _target.transform.position - transform.position;
+		
+		var vectorToPlanet = (Planet.transform.position - transform.position).normalized;
+		var _facingVec = Vector3.Cross(vectorToPlanet, axis.normalized).normalized;
 
-		if (_distanceToTarget <= _target.GetRadius() + _meshRadius) {
+		transform.rotation = Quaternion.LookRotation(_facingVec, -vectorToPlanet);
+		
+		if (_vectorToTarget.magnitude <= _target.GetRadius() + _meshRadius) {
 			_target = null;
 			OnReachedTarget.Invoke ();
 		}
