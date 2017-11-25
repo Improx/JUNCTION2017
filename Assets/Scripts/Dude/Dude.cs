@@ -46,7 +46,7 @@ public class Dude : MonoBehaviour
             _highlighted = false;
         }
 
-		if (DudeState.Melting) {
+		if (State == DudeState.Melting) {
 			_target.AddHealth(-_dps);
 		}
 		
