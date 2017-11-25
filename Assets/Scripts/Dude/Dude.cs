@@ -12,7 +12,8 @@ public class Dude : MonoBehaviour
         Idle,
         Walking,
         Grabbed,
-		Melting
+		Melting,
+        Falling
     }
 
     public DudeState State { get; private set; }
@@ -72,9 +73,8 @@ public class Dude : MonoBehaviour
     {
         //_renderer.material = _defaultMaterial;
         _highlighted = false;
-        SetState(DudeState.Walking);
-        FindNewTarget();
-        _movement.AlignWithPlanet(_movement.Planet);
+        SetState(DudeState.Falling);
+        //_movement.AlignWithPlanet(_movement.Planet);
     }
 
     public void SetState(DudeState state) {
@@ -96,6 +96,10 @@ public class Dude : MonoBehaviour
             case DudeState.Grabbed:
                 _animator.SetBool("Walking", false);
                 _animator.SetBool("Struggle", true);
+                break;
+            case DudeState.Falling:
+                _animator.SetBool("Walking", false);
+                _animator.SetBool("Struggle", false);
                 break;
             default:
                 break;
