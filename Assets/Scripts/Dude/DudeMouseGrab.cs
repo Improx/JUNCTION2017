@@ -35,7 +35,7 @@ public class DudeMouseGrab : MonoBehaviour
 	            var vectorFromPlanet = (Grabbed.transform.position - planet.transform.position).normalized;
 
 	            Grabbed.transform.position = hit.point + vectorFromPlanet * DropDistance;
-                Grabbed.transform.forward = vectorFromPlanet;
+                Grabbed.transform.up = vectorFromPlanet;
 
                 if (Input.GetMouseButtonUp(0)) {
                     Release(planet);
