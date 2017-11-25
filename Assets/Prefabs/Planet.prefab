@@ -90,6 +90,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4914232818034660}
   - component: {fileID: 114553814115827952}
+  - component: {fileID: 114280998331717758}
   m_Layer: 0
   m_Name: Planet
   m_TagString: Untagged
@@ -289,6 +290,25 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1730229990770462}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &114280998331717758
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1959408760872128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1072f12e0c86f4c529254151111661e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minSpawnDistance: 60
+  maxSpawnDistance: 80
+  minTorque: 30
+  maxTorque: 40
+  _prefabToSpawn: {fileID: 4684477630575370, guid: 8e71f75cbebc64840b7c5f66dc3fd9bc,
+    type: 2}
+  _minFlyForce: 100
+  _maxFlyForce: 300
 --- !u!114 &114386566862658378
 MonoBehaviour:
   m_ObjectHideFlags: 1
