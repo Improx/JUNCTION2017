@@ -12,7 +12,7 @@ public abstract class MeltableBase : MonoBehaviour {
 	[SerializeField]
 	private Planet _planet;
 	[SerializeField]
-	//private GameManager _gameManager;
+	private GameManager _gameManager;
 
 	private Vector3 _vectorToPlanet;
 
@@ -65,7 +65,7 @@ public abstract class MeltableBase : MonoBehaviour {
 	private void Die(){
 		MeltableBase.meltables.Remove (this);
 		if (MeltableBase.meltables.Count == 0) {
-			//_gameManager.EndGame ();
+			_gameManager.EndGame ();
 		}
 		Destroy (gameObject);
 		OnMelted.Invoke ();
