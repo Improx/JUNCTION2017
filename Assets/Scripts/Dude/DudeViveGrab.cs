@@ -21,8 +21,12 @@ public class DudeViveGrab : MonoBehaviour
 	    _controller.TriggerUnclicked += _controller_TriggerUnClicked;
     }
 
-    private void _controller_TriggerClicked(object sender, ClickedEventArgs e) => Grab(_lastCollided);
-    private void _controller_TriggerUnClicked(object sender, ClickedEventArgs e) => Release();
+	private void _controller_TriggerClicked(object sender, ClickedEventArgs e){
+		Grab (_lastCollided);
+	}
+	private void _controller_TriggerUnClicked(object sender, ClickedEventArgs e) {
+		Release ();
+	}
 
     // Update is called once per frame
     void Update () {
