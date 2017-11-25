@@ -45,6 +45,11 @@ public class Dude : MonoBehaviour
 	        SetState(DudeState.Grabbed);
             _highlighted = false;
         }
+
+		if (DudeState.Melting) {
+			_target.AddHealth(-_dps);
+		}
+		
 	}
 
     void OnMouseEnter() {
@@ -83,7 +88,6 @@ public class Dude : MonoBehaviour
             case DudeState.Melting:
                 _animator.SetBool("Walking", false);
                 _animator.SetBool("Struggle", false);
-				_target.AddHealth(-_dps);
                 break;
             case DudeState.Walking:
                 _animator.SetBool("Walking", true);
