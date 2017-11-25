@@ -23,9 +23,10 @@ public class DudeMouseGrab : MonoBehaviour
 	            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
 	            RaycastHit hit;
-	            if (Physics.Raycast(ray, out hit)) {
+                if (Physics.Raycast(ray, out hit)) {
 	                if (hit.collider.gameObject == Planet)
-	                {
+                    {
+                        print("lol");
 	                    Grabbed.transform.position = hit.point;
 
 	                    var vectorFromPlanet =  Grabbed.transform.position - Planet.transform.position;
