@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Explosion : MonoBehaviour {
 
-    void Explode(float size)
+    public void Explode(float size)
     {
         var exp = GetComponent<ParticleSystem>();
         var main = exp.main;
