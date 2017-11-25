@@ -8,7 +8,7 @@ public class HandMovement : MonoBehaviour
     private Camera _camera;
 
     void Start() {
-        _camera = GetComponentInParent<Camera>();
+		_camera = transform.root.GetComponentInChildren<Camera>();
     }
 
 	void Update(){
