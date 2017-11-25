@@ -102,7 +102,8 @@ public class Dude : MonoBehaviour
         }
     }
 
-    private void FindNewTarget(){
+    private void FindNewTarget() {
+        if (State == DudeState.Grabbed) return;
 		_target = MeltableBase.GetClosestMeltable (transform.position);
         
         if (_target == null){
