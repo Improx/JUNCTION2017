@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4159882804198278}
   - component: {fileID: 33445325722884104}
   - component: {fileID: 23133720651661226}
+  - component: {fileID: 114899743811067474}
   m_Layer: 0
   m_Name: Icecap
   m_TagString: Untagged
@@ -82,3 +83,20 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1407814705442442}
   m_Mesh: {fileID: 4300000, guid: 2873b5f87b338449585e61b44ed523e0, type: 3}
+--- !u!114 &114899743811067474
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1407814705442442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 634de3c934f2845ebab5bcda3f162299, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _planet: {fileID: 0}
+  OnMelted:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null

@@ -40,9 +40,13 @@ public abstract class MeltableBase : MonoBehaviour {
 	void Start(){
 		_currentHealth = _startingHealth;
 		_startingScale = transform.localScale;
-		_meshFilter = GetComponent<MeshFilter> ();
+		_meshFilter = GetComponentInChildren<MeshFilter> ();
 
-		_vectorToPlanet = (_planet.transform.position - transform.position).normalized;
+		AlignWithPlanet(_planet);
+	}
+
+	private void AlignWithPlanet(Planet targetPlanet){
+		_vectorToPlanet = (targetPlanet.transform.position - transform.position).normalized;
 		transform.rotation = Quaternion.LookRotation (-_vectorToPlanet);
 	}
 
