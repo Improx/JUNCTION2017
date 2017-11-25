@@ -4429,6 +4429,12 @@ GameObject:
   m_PrefabParentObject: {fileID: 1959408760872128, guid: 9e5ba873228be47c1935e4dd2c70d62f,
     type: 2}
   m_PrefabInternal: {fileID: 580691369}
+--- !u!114 &731854465 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114553814115827952, guid: 9e5ba873228be47c1935e4dd2c70d62f,
+    type: 2}
+  m_PrefabInternal: {fileID: 580691369}
+  m_Script: {fileID: 11500000, guid: fe07d5b7345264eb0a6013807cad1902, type: 3}
 --- !u!1 &740728499
 GameObject:
   m_ObjectHideFlags: 0
@@ -4560,7 +4566,7 @@ Camera:
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
-  m_TargetEye: 3
+  m_TargetEye: 0
   m_HDR: 1
   m_AllowMSAA: 1
   m_ForceIntoRT: 0
@@ -6771,7 +6777,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MainCamera: {fileID: 742789958}
-  Planet: {fileID: 0}
+  Planet: {fileID: 731854465}
   MinDistance: 5
   MaxDistance: 100
   RotSpeed: 50
