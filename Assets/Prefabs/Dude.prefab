@@ -507,7 +507,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1875193964912918}
   m_LocalRotation: {x: -0.5823438, y: 0.42339838, z: -0.4081015, w: 0.5613045}
-  m_LocalPosition: {x: 0.47200003, y: 0.16200002, z: 0}
+  m_LocalPosition: {x: 7.1252136, y: 1.9813228, z: -19.698326}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children:
   - {fileID: 4957149419289696}
@@ -698,7 +698,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0cb3d33dbf1043928875eb06ea822e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _planet: {fileID: 0}
   _movementSpeed: 19.75
   _target: {fileID: 0}
   OnReachedTarget:

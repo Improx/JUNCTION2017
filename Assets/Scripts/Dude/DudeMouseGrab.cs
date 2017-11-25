@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class DudeMouseGrab : MonoBehaviour
 {
-
-    public GameObject Planet;
     public Dude Grabbed { get; private set; }
 
     public static DudeMouseGrab Instance { get; private set; }
@@ -16,29 +14,27 @@ public class DudeMouseGrab : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void LateUpdate () {
+	    if (!Grabbed) return;
+	    if (Grabbed.State != Dude.DudeState.Grabbed) return;
+	    var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-	    if (Grabbed) {
-	        if (Grabbed.State == Dude.DudeState.Grabbed) {
-	            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+	    RaycastHit hit;
+	    if (Physics.Raycast(ray, out hit)) {
+	        if (hit.rigidbody && hit.rigidbody.GetComponent<Planet>()) {
+	            var planet = hit.rigidbody.GetComponent<Planet>();
 
-	            RaycastHit hit;
-	            if (Physics.Raycast(ray, out hit)) {
-	                if (hit.collider.gameObject == Planet)
-	                {
-	                    Grabbed.transform.position = hit.point;
+	            Grabbed.transform.position = hit.point;
 
-	                    var vectorFromPlanet =  Grabbed.transform.position - Planet.transform.position;
-	                    Grabbed.transform.up = vectorFromPlanet;
-	                }
+	            var vectorFromPlanet = (Grabbed.transform.position - planet.transform.position).normalized;
+	            Grabbed.transform.forward = vectorFromPlanet;
+
+                if (Input.GetMouseButtonUp(0)) {
+	                Release(planet);
 	            }
 	        }
 	    }
-
-	    if (Input.GetMouseButtonUp(0) && Grabbed) {
-	        Release();
-	    }
-    }
+	}
 
     public bool Grab(Dude dude)
     {
@@ -52,7 +48,7 @@ public class DudeMouseGrab : MonoBehaviour
         return true;
     }
 
-    public void Release()
+    public void Release(Planet planet)
     {
         if (!Grabbed) return;
         foreach (var col in Grabbed.GetComponentsInChildren<Collider>()) {
