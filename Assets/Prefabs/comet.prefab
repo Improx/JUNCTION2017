@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 54647110330025950}
   - component: {fileID: 135322929742849538}
   m_Layer: 0
-  m_Name: Comet
+  m_Name: comet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
