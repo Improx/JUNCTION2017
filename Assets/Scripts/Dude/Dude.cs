@@ -23,6 +23,8 @@ public class Dude : MonoBehaviour
     private Animator _animator;
     [SerializeField]
 	private float _dps = 1;
+    [SerializeField]
+    private GameObject _weapon;
 
 	void Start () {
 	    //_renderer = GetComponentInChildren<Renderer>();
@@ -78,7 +80,11 @@ public class Dude : MonoBehaviour
     }
 
     public void SetState(DudeState state) {
-        State = state;
+
+        if(State != state){
+            EnterState(state);
+        }
+
         switch (State)
         {
             case DudeState.Melting:
@@ -106,6 +112,19 @@ public class Dude : MonoBehaviour
         }
     }
 
+    private void EnterState(DudeState state){
+        State = state;
+
+        switch(state){
+            case DudeState.Melting:
+                _weapon.SetActive(true);
+                break;
+            default:
+                _weapon.SetActive(false);
+                break;
+        }
+    }
+
     private void FindNewTarget() {
         if (State == DudeState.Grabbed) return;
 		_target = MeltableBase.GetClosestMeltable (transform.position);
@@ -124,6 +143,7 @@ public class Dude : MonoBehaviour
 
 	private void Melt(){
 	    SetState(DudeState.Melting);
+        _weapon.SetActive(true);
     }
 
 }
