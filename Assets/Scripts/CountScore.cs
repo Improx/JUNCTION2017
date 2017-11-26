@@ -36,12 +36,11 @@ public class CountScore : MonoBehaviour {
 
     // Update is called once per frame
     void AddPoints () {
-		_score += _pointsPerSecond;
-		SetScoreText ();
+        AddPoints(_pointsPerSecond);
     }
 
-    public void AddPoints(int points)
-    {
+    public void AddPoints(int points) {
+        if (GameManager.GameOver) return;
         _score += points;
         SetScoreText();
     }

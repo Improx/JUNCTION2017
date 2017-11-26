@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DudeViveGrab : MonoBehaviour
 {
@@ -26,9 +27,16 @@ public class DudeViveGrab : MonoBehaviour
 
         _controller.TriggerClicked += _controller_TriggerClicked;
 	    _controller.TriggerUnclicked += _controller_TriggerUnClicked;
+        _controller.MenuButtonClicked += _controller_MenuClicked;
     }
 
-	private void _controller_TriggerClicked(object sender, ClickedEventArgs e){
+    private void _controller_MenuClicked(object sender, ClickedEventArgs e) {
+        if (!GameManager.GameOver) return;
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    private void _controller_TriggerClicked(object sender, ClickedEventArgs e){
 		Grab (_lastCollided);
 	}
 	private void _controller_TriggerUnClicked(object sender, ClickedEventArgs e) {
