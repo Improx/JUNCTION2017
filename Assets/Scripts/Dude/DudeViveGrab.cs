@@ -9,12 +9,12 @@ public class DudeViveGrab : MonoBehaviour
     public Animator AnimationController;
     public float PlanetSnapDistance = 5f;
 
-    public Dude Grabbed { get; private set; }
+    public Grabbable Grabbed { get; private set; }
     public Vector3 Velocity;
 
     private SteamVR_TrackedController _controller;
 
-    private Dude _lastCollided;
+    private Grabbable _lastCollided;
 
     private Planet _closestPlanet;
 
@@ -40,33 +40,10 @@ public class DudeViveGrab : MonoBehaviour
 
         _lastPosition = transform.position;
     }
-    // Update is called once per frame
-    void LateUpdate () {
-        if (!Grabbed) return;
 
-        _closestPlanet = null;
-        foreach (var planet in FindObjectsOfType<Planet>()) {
-            var distance = Vector3.Distance(transform.position, planet.transform.position) - planet.Radius;
-
-            if (!(distance < PlanetSnapDistance)) continue;
-
-            if (_closestPlanet != null) {
-                var oldDistance = Vector3.Distance(transform.position, _closestPlanet.transform.position) - _closestPlanet.Radius;
-
-                if (oldDistance > distance) continue;
-            }
-
-            _closestPlanet = planet;
-        }
-
-        if (_closestPlanet != null) {
-            _closestPlanet.Highlight.SetActive(true);
-        }
-    }
-
-    public bool Grab(Dude dude)
+    public bool Grab(Grabbable dude)
     {
-        if (Grabbed || !dude) return false;
+        if (Grabbed != null || !dude) return false;
 
         Grabbed = dude;
         foreach (var col in Grabbed.GetComponentsInChildren<Collider>())
@@ -90,30 +67,26 @@ public class DudeViveGrab : MonoBehaviour
         {
             col.enabled = true;
         }
+        
+        Grabbed.transform.SetParent(null);
+        Grabbed.Throw(Velocity);
 
-        if (_closestPlanet) {
 
-            Grabbed.transform.SetParent(_closestPlanet.transform);
-            Grabbed.Release(_closestPlanet);
-
-            if (_closestPlanet) {
-                _closestPlanet.Highlight.SetActive(false);
-                _closestPlanet = null;
-            }
-        } else {
-            Grabbed.transform.SetParent(null);
-            Grabbed.Throw(Velocity);
-        }
-
+        StartCoroutine(KillTimer(Grabbed.gameObject));
         AnimationController.SetBool("Grabbed", false);
         Grabbed = null;
+    }
+    private IEnumerator KillTimer(GameObject obj)
+    {
+        yield return new WaitForSeconds(5);
+        Destroy(obj);
     }
 
     private void SetCollidingObject(Collider other) {
         if (Grabbed) return;
 
         if (other.attachedRigidbody == null) return;
-        var dude = other.attachedRigidbody.GetComponent<Dude>();
+        var dude = other.attachedRigidbody.GetComponent<Grabbable>();
         if (!dude) return;
         _lastCollided = dude;
     }
