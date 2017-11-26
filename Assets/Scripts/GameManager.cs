@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour {
 	public void EndGame(){
 		Debug.Log ("Game over!");
 
-		List<Planet> planets = new List<Planet>(FindObjectsOfType<Planet>());
+		var planets = new List<Planet>(FindObjectsOfType<Planet>());
 		foreach (var p in planets)
 		{
 			StartCoroutine(p.Explode(() => {
