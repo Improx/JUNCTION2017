@@ -8,7 +8,11 @@ public class GameManager : MonoBehaviour {
 
 	[SerializeField]
 	private CountScore _scoreText;
-    public static bool GameOver { get; private set; }
+  public static bool GameOver { get; private set; }
+	[SerializeField]
+	private Text _restartText;
+	[SerializeField]
+	private Text _tipsText;
 
     public static GameManager Instance { get; private set; }
 
@@ -21,8 +25,12 @@ public class GameManager : MonoBehaviour {
 
 	public void EndGame(){
 		Debug.Log ("Game over!");
-	    GameOver = true;
-        var planets = new List<Planet>(FindObjectsOfType<Planet>());
+	  GameOver = true;
+    var planets = new List<Planet>(FindObjectsOfType<Planet>());
+
+		_restartText.gameObject.SetActive (true);
+		_tipsText.gameObject.SetActive (false);
+		
 		foreach (var p in planets)
 		{
 			StartCoroutine(p.Explode(() => {
