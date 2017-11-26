@@ -6,7 +6,9 @@ public class SpawnOnSphere : MonoBehaviour {
 
 	[SerializeField] private Dude _prefabToSpawn;
 	[SerializeField] private float _spawnRadius = 2f;
-	private float _nextSpawnTime;
+    [SerializeField] private float _startTime = 8f;
+
+    private float _nextSpawnTime;
 	private int _dudesSpawned = 0;
 
 	private List<Dude> _spawnedDudes = new List<Dude>();
@@ -26,7 +28,7 @@ public class SpawnOnSphere : MonoBehaviour {
 	private void CheckSpawnTimeAndSpawn(){
 		if(Time.time >= _nextSpawnTime){
 			Spawn();
-			_spawnDelay = 10f * Mathf.Exp(-(1f/50f)*_dudesSpawned);
+			_spawnDelay = _startTime * Mathf.Exp(-(1f/30f)*_dudesSpawned);
 		    _spawnDelay = Mathf.Max(_spawnDelay, 0.25f);
             _nextSpawnTime = Time.time + _spawnDelay;
 			_dudesSpawned++;

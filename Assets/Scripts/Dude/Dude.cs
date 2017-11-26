@@ -128,7 +128,7 @@ public class Dude : Grabbable
     }
 
     private void DoYell() {
-        _audio.pitch = Random.Range(0.85f, 0.1f);
+        _audio.pitch = Random.Range(0.85f, 1.05f);
 		_audio.Play ();
     }
 
