@@ -19,8 +19,10 @@ public class DudeMovement : MonoBehaviour {
 	    _dude = GetComponent<Dude>();
 	}
 
-	private void Update() {
-	    DropToPlanet();
+	private void Update()
+	{
+	    if (!GameManager.GameStart || GameManager.GameOver) return;
+        DropToPlanet();
 	    MoveToTarget();
     }
 

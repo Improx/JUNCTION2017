@@ -18,7 +18,8 @@ public class SpawnOnSphere : MonoBehaviour {
 	    _planet = GetComponentInParent<Planet>();
 	}
 
-	private void Update(){
+	private void Update() {
+	    if (!GameManager.GameStart || GameManager.GameOver) return;
 		CheckSpawnTimeAndSpawn();
 	}
 

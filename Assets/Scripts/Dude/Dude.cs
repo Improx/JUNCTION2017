@@ -50,7 +50,8 @@ public class Dude : Grabbable
 	}
 
 	void Update () {
-	    if (_highlighted && Input.GetMouseButton(0) && !DudeMouseGrab.Instance.Grabbed) {
+	    if (!GameManager.GameStart || GameManager.GameOver) return;
+        if (_highlighted && Input.GetMouseButton(0) && !DudeMouseGrab.Instance.Grabbed) {
 	        DudeMouseGrab.Instance.Grab(this);
 	        SetState(DudeState.Grabbed);
             _highlighted = false;

@@ -28,6 +28,13 @@ public class DudeViveGrab : MonoBehaviour
         _controller.TriggerClicked += _controller_TriggerClicked;
 	    _controller.TriggerUnclicked += _controller_TriggerUnClicked;
         _controller.MenuButtonClicked += _controller_MenuClicked;
+        _controller.PadClicked += _controller_PadClicked;
+    }
+
+    private void _controller_PadClicked(object sender, ClickedEventArgs e) {
+        if (GameManager.GameStart) return;
+
+        GameManager.StartGame();
     }
 
     private void _controller_MenuClicked(object sender, ClickedEventArgs e) {
@@ -44,6 +51,13 @@ public class DudeViveGrab : MonoBehaviour
 	}
 
     void Update() {
+
+        if (!GameManager.GameStart || GameManager.GameOver)
+        {
+            Release();
+            return;
+        }
+
         //Velocity = (transform.position - _lastPosition) / Time.fixedDeltaTime;
         //_lastPosition = transform.position;
 
@@ -56,6 +70,7 @@ public class DudeViveGrab : MonoBehaviour
 
     public bool Grab(Grabbable dude)
     {
+        if (!GameManager.GameStart || GameManager.GameOver) return false;
         AnimationController.SetBool("Grabbed", true);
 
         if (Grabbed != null || !dude) return false;

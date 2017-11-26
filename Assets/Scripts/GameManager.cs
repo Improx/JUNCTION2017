@@ -8,16 +8,18 @@ public class GameManager : MonoBehaviour {
 
 	[SerializeField]
 	private CountScore _scoreText;
-  public static bool GameOver { get; private set; }
 	[SerializeField]
 	private Text _restartText;
 	[SerializeField]
 	private Text _tipsText;
+    public static bool GameOver { get; private set; }
+    public static bool GameStart { get; private set; }
 
     public static GameManager Instance { get; private set; }
 
     void Start(){
 	    GameOver = false;
+        GameStart = false;
 
         if (Instance) throw new Exception("Multiple GameManager instances");
         Instance = this;
@@ -39,4 +41,8 @@ public class GameManager : MonoBehaviour {
 		}
 
 	}
+
+    public static void StartGame() {
+        GameOver = true;
+    }
 }

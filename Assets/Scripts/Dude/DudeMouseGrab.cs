@@ -22,6 +22,7 @@ public class DudeMouseGrab : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
+	    return;
 	    if (!Grabbed) return;
 	    if (Grabbed.State != Dude.DudeState.Grabbed) return;
 	    var ray = _camera.ScreenPointToRay(Input.mousePosition);

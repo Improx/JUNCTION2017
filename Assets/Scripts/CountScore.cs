@@ -40,7 +40,7 @@ public class CountScore : MonoBehaviour {
     }
 
     public void AddPoints(int points) {
-        if (GameManager.GameOver) return;
+        if (!GameManager.GameStart || GameManager.GameOver) return;
         _score += points;
         SetScoreText();
     }
