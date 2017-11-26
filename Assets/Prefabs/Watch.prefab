@@ -141,7 +141,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4785637364455036}
   m_Layer: 0
-  m_Name: watch
+  m_Name: Watch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -507,8 +507,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07eb1b238943e4307baf220d5b8c0605, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _titleText: {fileID: 0}
-  _scoreText: {fileID: 0}
+  _scoreTexts: []
   _pointsPerSecond: 1
 --- !u!114 &114347683226215124
 MonoBehaviour:
@@ -554,8 +553,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07eb1b238943e4307baf220d5b8c0605, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _titleText: {fileID: 114894470183597876}
-  _scoreText: {fileID: 114380184159614660}
+  _scoreTexts: []
   _pointsPerSecond: 1
 --- !u!114 &114373716581318064
 MonoBehaviour:

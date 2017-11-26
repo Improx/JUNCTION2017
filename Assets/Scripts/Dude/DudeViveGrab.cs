@@ -18,6 +18,9 @@ public class DudeViveGrab : MonoBehaviour
     private Planet _closestPlanet;
 
     private Vector3 _lastPosition;
+
+    private List<Vector3> _lastPositions = new List<Vector3> { new Vector3(0,0,0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0),};
+
     // Use this for initialization
     void Start ()
 	{
@@ -35,13 +38,18 @@ public class DudeViveGrab : MonoBehaviour
 	}
 
     void FixedUpdate() {
-        Velocity = (transform.position - _lastPosition) /Time.fixedDeltaTime;
+        //Velocity = (transform.position - _lastPosition) / Time.fixedDeltaTime;
+        //_lastPosition = transform.position;
 
-        _lastPosition = transform.position;
+        Velocity = (transform.position - _lastPositions[0]) / Time.fixedDeltaTime;
+        _lastPositions.RemoveAt(0);
+        _lastPositions.Add(transform.position);
     }
 
     public bool Grab(Grabbable dude)
     {
+        AnimationController.SetBool("Grabbed", true);
+
         if (Grabbed != null || !dude) return false;
 
         Grabbed = dude;
@@ -50,7 +58,6 @@ public class DudeViveGrab : MonoBehaviour
             col.enabled = false;
         }
 
-        AnimationController.SetBool("Grabbed", true);
         Grabbed.Grab();
         Grabbed.transform.position = GrabPoint.position;
         Grabbed.transform.rotation = GrabPoint.rotation;
@@ -60,6 +67,9 @@ public class DudeViveGrab : MonoBehaviour
     }
 
     public void Release() {
+
+        AnimationController.SetBool("Grabbed", false);
+        
         if (!Grabbed) return;
 
         foreach (var col in Grabbed.GetComponentsInChildren<Collider>())
@@ -69,10 +79,9 @@ public class DudeViveGrab : MonoBehaviour
         
         Grabbed.transform.SetParent(null);
         Grabbed.Throw(Velocity);
-
+        Grabbed.Flying = true;
 
         StartCoroutine(KillTimer(Grabbed.gameObject));
-        AnimationController.SetBool("Grabbed", false);
         Grabbed = null;
     }
     private IEnumerator KillTimer(GameObject obj)
