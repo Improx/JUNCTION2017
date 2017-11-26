@@ -40,5 +40,6 @@ public class SpawnOnSphere : MonoBehaviour {
 		dude.transform.localScale = Vector3.one * 0.2f;
 		_spawnedDudes.Add(dude);
         dude.GetComponent<DudeMovement>().AlignWithPlanet(_planet);
+	    dude.GetComponent<DudeMovement>().SnapToSurface();
 	}
 }
