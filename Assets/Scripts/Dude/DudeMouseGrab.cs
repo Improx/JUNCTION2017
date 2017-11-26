@@ -59,7 +59,7 @@ public class DudeMouseGrab : MonoBehaviour
         foreach (var col in Grabbed.GetComponentsInChildren<Collider>()) {
             col.enabled = true;
         }
-        Grabbed.Release(planet);
+        //Grabbed.Release(planet);
 
 
         Grabbed = null;

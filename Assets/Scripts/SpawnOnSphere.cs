@@ -7,6 +7,7 @@ public class SpawnOnSphere : MonoBehaviour {
 	[SerializeField] private Dude _prefabToSpawn;
 	[SerializeField] private float _spawnDelay = 10f;
 	[SerializeField] private float _spawnDecayAmount = 0.05f;
+	[SerializeField] private float _spawnRadius = 2f;
 	private float _nextSpawnTime;
 
 	private List<Dude> _spawnedDudes = new List<Dude>();
@@ -25,13 +26,16 @@ public class SpawnOnSphere : MonoBehaviour {
 		if(Time.time >= _nextSpawnTime){
 			Spawn();
 			_spawnDelay -= _spawnDecayAmount;
-			_nextSpawnTime = Time.time + _spawnDelay;
+		    _spawnDelay = Mathf.Max(_spawnDelay, 0.05f);
+            _nextSpawnTime = Time.time + _spawnDelay;
 		}
 	}
 
 	private void Spawn(){
 		var dude = Instantiate(_prefabToSpawn);
-		dude.transform.position = transform.position;
+
+		Vector2 offset = Random.insideUnitCircle;
+		dude.transform.position = transform.position + new Vector3(offset.x, 0f, offset.y) * _spawnRadius;
 		dude.transform.SetParent(_planet.transform, true);
 		dude.transform.localScale = Vector3.one * 0.2f;
 		_spawnedDudes.Add(dude);

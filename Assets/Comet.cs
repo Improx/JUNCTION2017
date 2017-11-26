@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Comet : MonoBehaviour, ISpaceObject {
+public class Comet : Grabbable, ISpaceObject {
 
 	[SerializeField] private float minTorque = 10f;
 	[SerializeField] private float maxTorque = 30f;
@@ -29,16 +29,37 @@ public class Comet : MonoBehaviour, ISpaceObject {
 	}
 
 	private void OnCollisionEnter(Collision collision){
-		Planet hit = collision.collider.transform.root.GetComponentInChildren<Planet>();
+		var hit = collision.collider.transform.root.GetComponentInChildren<Planet>();
 
-		if(hit == null){
-			print("hit object wasn't a planet");
-			return;
-		}
+		if(hit == null && collision.rigidbody) {
+		    var grabbable = collision.rigidbody.GetComponent<Grabbable>();
+
+            if (Flying) CountScore.Instance.AddPoints(100);
+
+		    if (grabbable) Destroy(grabbable.gameObject);
+        }
+
+	    if (hit) {
+	        foreach (var icecap in hit.GetComponentsInChildren<Icecap>()) {
+	            icecap.AddHealth(-50);
+            }
+	    }
 
 		Destroy(gameObject);
 
 		GameObject exp = Instantiate(_hitExplosion.gameObject, transform.position, Quaternion.identity);
 		exp.GetComponent<Explosion>().Explode(60);
 	}
+
+    public override void Throw(Vector3 velocity)
+    {
+        _rb.velocity = velocity;
+        _rb.isKinematic = false;
+
+    }
+
+    public override void Grab() {
+        _rb.useGravity = false;
+        _rb.isKinematic = true;
+    }
 }
