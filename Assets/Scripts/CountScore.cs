@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,7 +21,14 @@ public class CountScore : MonoBehaviour {
 		_score = 0;
 		SetScoreText ();
 		InvokeRepeating ("AddPoints", 1.0f, 1.0f);
+	}
 
+	private void SetScoreText (){
+		_scoreText.text = _score.ToString();
+	}
+
+	public void SetTitleText(string text){
+		_titleText.text = text;
 	    if (Instance) throw new Exception("Multiple CountScore instances");
 	    Instance = this;
 
@@ -31,6 +38,12 @@ public class CountScore : MonoBehaviour {
     void AddPoints () {
 		_score += _pointsPerSecond;
 		SetScoreText ();
+    }
+
+    // Update is called once per frame
+    public void AddPoints() {
+        _score += _pointsPerSecond;
+        SetScoreText();
     }
     public void AddPoints(int points)
     {
@@ -45,4 +58,7 @@ public class CountScore : MonoBehaviour {
 	public void SetTitleText(string text){
 		_titleText.text = text;
     }
+		
 }
+		
+	    Instance = this;
