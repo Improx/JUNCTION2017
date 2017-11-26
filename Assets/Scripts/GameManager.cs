@@ -23,15 +23,16 @@ public class GameManager : MonoBehaviour {
 
         if (Instance) throw new Exception("Multiple GameManager instances");
         Instance = this;
+        _tipsText.gameObject.SetActive(true);
+        _restartText.gameObject.SetActive(false);
     }
 
 	public void EndGame(){
 		Debug.Log ("Game over!");
-	  GameOver = true;
-    var planets = new List<Planet>(FindObjectsOfType<Planet>());
+	    GameOver = true;
+        var planets = new List<Planet>(FindObjectsOfType<Planet>());
 
 		_restartText.gameObject.SetActive (true);
-		_tipsText.gameObject.SetActive (false);
 		
 		foreach (var p in planets)
 		{
@@ -43,6 +44,7 @@ public class GameManager : MonoBehaviour {
 	}
 
     public static void StartGame() {
-        GameOver = true;
+        GameStart = true;
+        Instance._tipsText.gameObject.SetActive(false);
     }
 }
