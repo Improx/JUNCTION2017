@@ -19,6 +19,9 @@ public class DudeViveGrab : MonoBehaviour
     private Planet _closestPlanet;
 
     private Vector3 _lastPosition;
+
+    private List<Vector3> _lastPositions = new List<Vector3> { new Vector3(0,0,0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0),};
+
     // Use this for initialization
     void Start ()
 	{
@@ -36,9 +39,12 @@ public class DudeViveGrab : MonoBehaviour
 	}
 
     void FixedUpdate() {
-        Velocity = (transform.position - _lastPosition) /Time.fixedDeltaTime;
+        //Velocity = (transform.position - _lastPosition) / Time.fixedDeltaTime;
+        //_lastPosition = transform.position;
 
-        _lastPosition = transform.position;
+        Velocity = (transform.position - _lastPositions[0]) / Time.fixedDeltaTime;
+        _lastPositions.RemoveAt(0);
+        _lastPositions.Add(transform.position);
     }
     // Update is called once per frame
     void LateUpdate () {
