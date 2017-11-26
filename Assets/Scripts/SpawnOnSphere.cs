@@ -26,7 +26,7 @@ public class SpawnOnSphere : MonoBehaviour {
 		if(Time.time >= _nextSpawnTime){
 			Spawn();
 			_spawnDelay -= _spawnDecayAmount;
-		    _spawnDelay = Mathf.Max(_spawnDelay, 0.05f);
+		    _spawnDelay = Mathf.Max(_spawnDelay, 0.5f);
             _nextSpawnTime = Time.time + _spawnDelay;
 		}
 	}
