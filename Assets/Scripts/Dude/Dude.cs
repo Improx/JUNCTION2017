@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Dude : MonoBehaviour
+public class Dude : Grabbable
 {
     public Material HightligtMaterial;
 
@@ -68,12 +68,13 @@ public class Dude : MonoBehaviour
         _highlighted = false;
     }
 
-    public void Grab()
+    public override void Grab()
     {
         SetState(DudeState.Grabbed);
         _movement.RemovePlanet();
+        _rigidbody.isKinematic = true;
     }
-    public void Release(Planet planet)
+    /*public override void Release(Planet planet)
     {
         //_renderer.material = _defaultMaterial;
         _highlighted = false;
@@ -81,7 +82,7 @@ public class Dude : MonoBehaviour
         if (planet) {
             _movement.AlignWithPlanet(planet);
         }
-    }
+    }*/
 
     public void SetState(DudeState state) {
         State = state;
@@ -139,7 +140,7 @@ public class Dude : MonoBehaviour
         _weapon.SetActive(true);
     }
 
-    public void Throw(Vector3 velocity) {
+    public override void Throw(Vector3 velocity) {
         _rigidbody.velocity = velocity;
         _rigidbody.isKinematic = false;
     }
