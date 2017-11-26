@@ -5,14 +5,14 @@ using UnityEngine;
 public class SpawnOnSphere : MonoBehaviour {
 
 	[SerializeField] private Dude _prefabToSpawn;
-	[SerializeField] private float _spawnDelay = 10f;
-	[SerializeField] private float _spawnDecayAmount = 0.05f;
 	[SerializeField] private float _spawnRadius = 2f;
 	private float _nextSpawnTime;
+	private int _dudesSpawned = 0;
 
 	private List<Dude> _spawnedDudes = new List<Dude>();
 
 	private Planet _planet;
+	float _spawnDelay = 0f;
 
 	private void Start() {
 	    _planet = GetComponentInParent<Planet>();
@@ -25,9 +25,10 @@ public class SpawnOnSphere : MonoBehaviour {
 	private void CheckSpawnTimeAndSpawn(){
 		if(Time.time >= _nextSpawnTime){
 			Spawn();
-			_spawnDelay -= _spawnDecayAmount;
-		    _spawnDelay = Mathf.Max(_spawnDelay, 0.5f);
+			_spawnDelay = 10 * Mathf.Exp(-(1/200)*_dudesSpawned);
+		    _spawnDelay = Mathf.Max(_spawnDelay, 0.25f);
             _nextSpawnTime = Time.time + _spawnDelay;
+			_dudesSpawned++;
 		}
 	}
 
