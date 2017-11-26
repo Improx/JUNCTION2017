@@ -63,6 +63,7 @@ public class DudeViveGrab : MonoBehaviour
         Grabbed.transform.rotation = GrabPoint.rotation;
         Grabbed.transform.SetParent(GrabPoint);
 
+        SteamVR_Controller.Input((int)_controller.controllerIndex).TriggerHapticPulse(3000);
         return true;
     }
 
@@ -81,6 +82,7 @@ public class DudeViveGrab : MonoBehaviour
         Grabbed.Throw(Velocity);
         Grabbed.Flying = true;
 
+        SteamVR_Controller.Input((int)_controller.controllerIndex).TriggerHapticPulse(3000);
         StartCoroutine(KillTimer(Grabbed.gameObject));
         Grabbed = null;
     }
