@@ -460,6 +460,7 @@ MonoBehaviour:
     type: 2}
   _spawnDelay: 5
   _spawnDecayAmount: 0.05
+  _spawnRadius: 3
 --- !u!135 &135106435567131026
 SphereCollider:
   m_ObjectHideFlags: 1
