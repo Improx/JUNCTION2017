@@ -29,15 +29,15 @@ public class DudeMovement : MonoBehaviour {
 
         var distance = Vector3.Distance(transform.position, Planet.transform.position);
 
-        var vectorFromPlanet = (transform.position - Planet.transform.position).normalized;
         if (distance < Planet.Radius) {
             if (_dude.State == Dude.DudeState.Falling) {
-                transform.position = Planet.transform.position + vectorFromPlanet * Planet.Radius;
+                SnapToSurface();
                 _dude.SetState(Dude.DudeState.Idle);
                 _dude.FindNewTarget();
             }
         }
-        
+
+        var vectorFromPlanet = (transform.position - Planet.transform.position).normalized;
         transform.position = Planet.transform.position + vectorFromPlanet * (distance - Time.deltaTime * _fallingSpeed);
     }
 
@@ -49,13 +49,20 @@ public class DudeMovement : MonoBehaviour {
         transform.rotation = Quaternion.LookRotation(vectorFromPlanet, transform.up);
     }
 
+    public void SnapToSurface() {
+        if (!Planet) return;
+
+        var vectorFromPlanet = (transform.position - Planet.transform.position).normalized;
+        transform.position = Planet.transform.position + vectorFromPlanet * Planet.Radius;
+    }
+
     private void MoveToTarget() {
 	    if (_dude.State != Dude.DudeState.Walking || !Planet) return;
         if (_target == null) {
 			return;
 		}
 
-		Vector3 axis = Vector3.Cross ((_target.transform.position - transform.position).normalized, (Planet.transform.position - transform.position).normalized);
+		var axis = Vector3.Cross ((_target.transform.position - transform.position).normalized, (Planet.transform.position - transform.position).normalized);
 		transform.RotateAround (Planet.transform.position, axis.normalized, _movementSpeed * Time.deltaTime);
 
 		var vectorToTarget = _target.transform.position - transform.position;
