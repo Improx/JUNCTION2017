@@ -6,9 +6,6 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour {
 
 	[SerializeField]
-	private GameObject _gameOverUI;
-
-	[SerializeField]
 	private CountScore _scoreText;
 
 	void Start(){
@@ -22,7 +19,6 @@ public class GameManager : MonoBehaviour {
 		foreach (var p in planets)
 		{
 			StartCoroutine(p.Explode(() => {
-				_gameOverUI.SetActive (true);
 				_scoreText.SetTitleText ("Game Over!");
 				Time.timeScale = 0;
 			}));

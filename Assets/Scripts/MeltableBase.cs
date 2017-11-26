@@ -6,6 +6,7 @@ public abstract class MeltableBase : MonoBehaviour {
 
     [SerializeField]
     protected float StartingHealth = 100;
+    [SerializeField]
     protected float CurrentHealth;
 	private Vector3 _startingScale;
 	private MeshFilter _meshFilter;
@@ -34,16 +35,17 @@ public abstract class MeltableBase : MonoBehaviour {
 			}
 		}
 
-		return closestMeltable;
+        return closestMeltable;
 	}
 
 	void Awake(){
 		meltables.Add (this);
 	}
 
-	void Start(){
+	void Start() {
 		CurrentHealth = StartingHealth;
-		_startingScale = transform.localScale;
+	    _planet = GetComponentInParent<Planet>();
+        _startingScale = transform.localScale;
 		_meshFilter = GetComponentInChildren<MeshFilter> ();
 
 		AlignWithPlanet(_planet);
@@ -71,7 +73,7 @@ public abstract class MeltableBase : MonoBehaviour {
 		if (MeltableBase.meltables.Count == 0) {
 			_gameManager.EndGame ();
 		}
-		Destroy (gameObject);
+		gameObject.SetActive(false);
 		OnMelted.Invoke ();
 	}
 		

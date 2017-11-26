@@ -29,7 +29,7 @@ public class Comet : Grabbable, ISpaceObject {
 	}
 
 	private void OnCollisionEnter(Collision collision){
-		Planet hit = collision.collider.transform.root.GetComponentInChildren<Planet>();
+		var hit = collision.collider.transform.root.GetComponentInChildren<Planet>();
 
 		if(hit == null && collision.rigidbody) {
 		    var grabbable = collision.rigidbody.GetComponent<Grabbable>();
@@ -38,6 +38,12 @@ public class Comet : Grabbable, ISpaceObject {
 
 		    if (grabbable) Destroy(grabbable.gameObject);
         }
+
+	    if (hit) {
+	        foreach (var icecap in hit.GetComponentsInChildren<Icecap>()) {
+	            icecap.AddHealth(-50);
+            }
+	    }
 
 		Destroy(gameObject);
 

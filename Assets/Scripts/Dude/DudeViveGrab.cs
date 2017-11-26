@@ -69,7 +69,7 @@ public class DudeViveGrab : MonoBehaviour
         
         Grabbed.transform.SetParent(null);
         Grabbed.Throw(Velocity);
-
+        Grabbed.Flying = true;
 
         StartCoroutine(KillTimer(Grabbed.gameObject));
         AnimationController.SetBool("Grabbed", false);
