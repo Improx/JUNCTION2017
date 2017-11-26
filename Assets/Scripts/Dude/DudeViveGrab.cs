@@ -9,7 +9,7 @@ public class DudeViveGrab : MonoBehaviour
     public float PlanetSnapDistance = 5f;
 
     public Grabbable Grabbed { get; private set; }
-    public Vector3 Velocity;
+    public Vector3 Velocity { get; private set; }
 
     private SteamVR_TrackedController _controller;
 
@@ -19,12 +19,10 @@ public class DudeViveGrab : MonoBehaviour
 
     private Vector3 _lastPosition;
 
-    private List<Vector3> _lastPositions = new List<Vector3> { new Vector3(0,0,0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0),};
-
     // Use this for initialization
-    void Start ()
-	{
-	    _controller = GetComponent<SteamVR_TrackedController>() ?? gameObject.AddComponent<SteamVR_TrackedController>();
+    void Start () {
+        _lastPosition = transform.position;
+        _controller = GetComponent<SteamVR_TrackedController>() ?? gameObject.AddComponent<SteamVR_TrackedController>();
 
         _controller.TriggerClicked += _controller_TriggerClicked;
 	    _controller.TriggerUnclicked += _controller_TriggerUnClicked;
@@ -37,13 +35,15 @@ public class DudeViveGrab : MonoBehaviour
 		Release ();
 	}
 
-    void FixedUpdate() {
+    void Update() {
         //Velocity = (transform.position - _lastPosition) / Time.fixedDeltaTime;
         //_lastPosition = transform.position;
 
-        Velocity = (transform.position - _lastPositions[0]) / Time.fixedDeltaTime;
-        _lastPositions.RemoveAt(0);
-        _lastPositions.Add(transform.position);
+        var direction =  transform.position - _lastPosition;
+        var speed = direction.magnitude / Time.deltaTime;
+
+        Velocity = direction.normalized * speed;
+        _lastPosition = transform.position;
     }
 
     public bool Grab(Grabbable dude)
