@@ -30,6 +30,7 @@ ModelImporter:
     100044: rig
     100046: WGT-rig_root
     100048: WGTS_rig
+    100050: Circle
     400000: //RootNode
     400002: Armature
     400004: Bone
@@ -55,20 +56,29 @@ ModelImporter:
     400044: rig
     400046: WGT-rig_root
     400048: WGTS_rig
+    400050: Circle
     2300000: //RootNode
     2300002: WGT-rig_root
     2300004: WGTS_rig
+    2300006: Circle
     3300000: //RootNode
     3300002: WGT-rig_root
     3300004: WGTS_rig
+    3300006: Circle
     4300000: Cube
     4300002: WGTS_rig
     4300004: WGT-rig_root
+    4300006: Circle
     7400000: Default Take
     7400002: Mint
     9500000: //RootNode
     13700000: Cube
   externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Nail
+    second: {fileID: 2100000, guid: 3bb74ccba0388459aaf7759a7b31397b, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
