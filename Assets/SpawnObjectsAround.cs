@@ -18,7 +18,8 @@ public class SpawnObjectsAround : MonoBehaviour {
 		InvokeRepeating("Spawn", 0f, _spawnRate);
 	}
 
-	private void Spawn(){
+	private void Spawn() {
+	    if (GameManager.GameOver || !GameManager.GameStart) return;
 		var pos = transform.position + Random.onUnitSphere * Random.Range(minSpawnDistance, maxSpawnDistance);
 		var obj = Instantiate(_prefabToSpawn);
 		obj.SetParent(gameObject.transform, true);
