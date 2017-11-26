@@ -155,6 +155,10 @@ public class Dude : Grabbable
     public override void Throw(Vector3 velocity) {
         _rigidbody.velocity = velocity;
         _rigidbody.isKinematic = false;
+
+        var randomTorque = Random.Range(10f, 30f);
+        var torque = new Vector3(randomTorque, randomTorque, randomTorque);
+        _rigidbody.AddTorque(torque);
     }
 
 	private void RandomizeColors(){

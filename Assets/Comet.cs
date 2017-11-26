@@ -23,8 +23,8 @@ public class Comet : Grabbable, ISpaceObject {
 		Debug.DrawRay(transform.position, vecToPlanet * 10000f, Color.red, 10000f);
 		_rb.AddForce(vecToPlanet * Random.Range(_minFlyForce, _maxFlyForce));
 
-		float randomTorque = Random.Range(minTorque, maxTorque);
-		Vector3 torque = new Vector3(randomTorque, randomTorque, randomTorque);
+		var randomTorque = Random.Range(minTorque, maxTorque);
+		var torque = new Vector3(randomTorque, randomTorque, randomTorque);
 		_rb.AddTorque(torque);
 	}
 
@@ -44,7 +44,7 @@ public class Comet : Grabbable, ISpaceObject {
 
 	    if (hit) {
 	        foreach (var icecap in hit.GetComponentsInChildren<Icecap>()) {
-	            icecap.AddHealth(-50);
+	            icecap.AddHealth(-200);
             }
 	    }
 
@@ -59,6 +59,9 @@ public class Comet : Grabbable, ISpaceObject {
         _rb.velocity = velocity;
         _rb.isKinematic = false;
 
+        var randomTorque = Random.Range(10f, 30f);
+        var torque = new Vector3(randomTorque, randomTorque, randomTorque);
+        _rb.AddTorque(torque);
     }
 
     public override void Grab() {
