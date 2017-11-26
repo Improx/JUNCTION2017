@@ -42,6 +42,8 @@ public class DudeViveGrab : MonoBehaviour
 
     public bool Grab(Grabbable dude)
     {
+        AnimationController.SetBool("Grabbed", true);
+
         if (Grabbed != null || !dude) return false;
 
         Grabbed = dude;
@@ -50,7 +52,6 @@ public class DudeViveGrab : MonoBehaviour
             col.enabled = false;
         }
 
-        AnimationController.SetBool("Grabbed", true);
         Grabbed.Grab();
         Grabbed.transform.position = GrabPoint.position;
         Grabbed.transform.rotation = GrabPoint.rotation;
@@ -60,6 +61,9 @@ public class DudeViveGrab : MonoBehaviour
     }
 
     public void Release() {
+
+        AnimationController.SetBool("Grabbed", false);
+        
         if (!Grabbed) return;
 
         foreach (var col in Grabbed.GetComponentsInChildren<Collider>())
@@ -72,7 +76,6 @@ public class DudeViveGrab : MonoBehaviour
         Grabbed.Flying = true;
 
         StartCoroutine(KillTimer(Grabbed.gameObject));
-        AnimationController.SetBool("Grabbed", false);
         Grabbed = null;
     }
     private IEnumerator KillTimer(GameObject obj)
