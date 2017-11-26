@@ -28,8 +28,9 @@ public class SpawnOnSphere : MonoBehaviour {
 	private void CheckSpawnTimeAndSpawn(){
 		if(Time.time >= _nextSpawnTime){
 			Spawn();
-			_spawnDelay = _startTime * Mathf.Exp(-(1f/30f)*_dudesSpawned);
-		    _spawnDelay = Mathf.Max(_spawnDelay, 0.25f);
+			_spawnDelay = _startTime * Mathf.Exp(-(1f/10f)*_dudesSpawned) + 0.35f;
+		    _spawnDelay = Mathf.Max(_spawnDelay, 0.35f);
+            print(_spawnDelay);
             _nextSpawnTime = Time.time + _spawnDelay;
 			_dudesSpawned++;
 		}
