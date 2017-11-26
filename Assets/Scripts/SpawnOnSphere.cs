@@ -13,8 +13,8 @@ public class SpawnOnSphere : MonoBehaviour {
 
 	private Planet _planet;
 
-	private void Start(){
-		_planet = FindObjectOfType<Planet>();
+	private void Start() {
+	    _planet = GetComponentInParent<Planet>();
 	}
 
 	private void Update(){
@@ -35,5 +35,6 @@ public class SpawnOnSphere : MonoBehaviour {
 		dude.transform.SetParent(_planet.transform, true);
 		dude.transform.localScale = Vector3.one * 0.2f;
 		_spawnedDudes.Add(dude);
+        dude.GetComponent<DudeMovement>().AlignWithPlanet(_planet);
 	}
 }
