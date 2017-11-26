@@ -13,7 +13,15 @@ public class GameManager : MonoBehaviour {
 
 	public void EndGame(){
 		Debug.Log ("Game over!");
-		_gameOverUI.SetActive (true);
-		Time.timeScale = 0;
+
+		List<Planet> planets = new List<Planet>(FindObjectsOfType<Planet>());
+		foreach (var p in planets)
+		{
+			StartCoroutine(p.Explode(() => {
+				_gameOverUI.SetActive (true);
+				Time.timeScale = 0;
+			}));
+		}
+
 	}
 }
