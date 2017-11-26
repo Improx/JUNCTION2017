@@ -1,16 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Explosion : MonoBehaviour {
 
+    public ParticleSystem Particles { get; private set; }
+
     public void Explode(float size)
     {
-        var exp = GetComponent<ParticleSystem>();
-        var main = exp.main;
-        main.startSpeed = size;
+        Particles = GetComponent<ParticleSystem>();
         
-        exp.Play();
+        var main = Particles.main;
+        main.startSpeed = size;
+
+        Particles.Play();
         Destroy(gameObject, main.duration);
     }
 }
