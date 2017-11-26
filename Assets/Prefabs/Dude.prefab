@@ -884,7 +884,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movementSpeed: 19.75
-  _fallingSpeed: 10
+  _fallingSpeed: 9
   _target: {fileID: 0}
   OnReachedTarget:
     m_PersistentCalls:
