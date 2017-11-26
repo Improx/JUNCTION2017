@@ -6,7 +6,9 @@ using UnityEngine.UI;
 public class CountScore : MonoBehaviour {
 
 	[SerializeField]
-	private List<Text> _scoreTexts;
+	private Text _titleText;
+	[SerializeField]
+	private Text _scoreText;
 
 	private int _score;
 	[SerializeField]
@@ -15,19 +17,21 @@ public class CountScore : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		_score = 0;
-		SetScoreTexts ();
+		SetScoreText ();
 		InvokeRepeating ("AddPoints", 1.0f, 1.0f);
 	}
 	
 	// Update is called once per frame
 	void AddPoints () {
 		_score += _pointsPerSecond;
-		SetScoreTexts ();
+		SetScoreText ();
 	}
 
-	void SetScoreTexts(){
-		foreach (var text in _scoreTexts) {
-			text.text = "Points: " + _score.ToString();
-		}
+	private void SetScoreText (){
+		_scoreText.text = _score.ToString();
+	}
+
+	public void SetTitleText(string text){
+		_titleText.text = text;
 	}
 }
