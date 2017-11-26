@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Events;
 
 public class DudeMovement : MonoBehaviour {
@@ -12,12 +13,10 @@ public class DudeMovement : MonoBehaviour {
 
 	public UnityEvent OnReachedTarget = new UnityEvent();
 
-    public Planet Planet { get; private set; }
+    public Planet Planet;
 
     private void Start() {
 	    _dude = GetComponent<Dude>();
-
-		AlignWithPlanet(FindObjectOfType<Planet>());
 	}
 
 	private void Update() {
@@ -43,13 +42,15 @@ public class DudeMovement : MonoBehaviour {
     }
 
     public void AlignWithPlanet(Planet targetPlanet) {
+        if (!targetPlanet) throw new Exception("AlignWithPlanet null planet");
+
         Planet = targetPlanet;
         var vectorFromPlanet = (transform.position - Planet.transform.position).normalized;
         transform.rotation = Quaternion.LookRotation(vectorFromPlanet, transform.up);
     }
 
     private void MoveToTarget() {
-	    if (_dude.State != Dude.DudeState.Walking) return;
+	    if (_dude.State != Dude.DudeState.Walking || !Planet) return;
         if (_target == null) {
 			return;
 		}
@@ -73,5 +74,9 @@ public class DudeMovement : MonoBehaviour {
     public void SetTarget(MeltableBase target)
     {
         _target = target;
+    }
+
+    public void RemovePlanet() {
+        Planet = null;
     }
 }

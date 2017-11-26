@@ -71,6 +71,7 @@ public class Dude : MonoBehaviour
     public void Grab()
     {
         SetState(DudeState.Grabbed);
+        _movement.RemovePlanet();
     }
     public void Release(Planet planet)
     {
@@ -78,7 +79,7 @@ public class Dude : MonoBehaviour
         _highlighted = false;
         SetState(DudeState.Falling);
         if (planet) {
-            _movement.AlignWithPlanet(_movement.Planet);
+            _movement.AlignWithPlanet(planet);
         }
     }
 
@@ -92,24 +93,27 @@ public class Dude : MonoBehaviour
                 _animator.SetBool("Struggle", false);
                 break;
             case DudeState.Walking:
+                _weapon.SetActive(false);
                 _animator.SetBool("Walking", true);
                 _animator.SetBool("Struggle", false);
                 break;
             case DudeState.Idle:
+                _weapon.SetActive(false);
                 _animator.SetBool("Walking", false);
                 _animator.SetBool("Struggle", false);
                 break;
             case DudeState.Grabbed:
+                _weapon.SetActive(false);
                 _animator.SetBool("Walking", false);
                 _animator.SetBool("Struggle", true);
 				_audio.Play ();
                 break;
             case DudeState.Falling:
+                _weapon.SetActive(false);
                 _animator.SetBool("Walking", false);
                 _animator.SetBool("Struggle", false);
                 break;
             default:
-                _weapon.SetActive(false);
                 break;
         }
     }
