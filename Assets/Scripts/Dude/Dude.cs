@@ -114,7 +114,7 @@ public class Dude : Grabbable
                 _weapon.SetActive(false);
                 _animator.SetBool("Walking", false);
                 _animator.SetBool("Struggle", true);
-				_audio.Play ();
+                DoYell();
                 break;
             case DudeState.Falling:
                 _weapon.SetActive(false);
@@ -124,6 +124,11 @@ public class Dude : Grabbable
             default:
                 break;
         }
+    }
+
+    private void DoYell() {
+        _audio.pitch = Random.Range(0.85f, 0.1f);
+		_audio.Play ();
     }
 
     public void FindNewTarget() {

@@ -21,7 +21,9 @@ public class CountScore : MonoBehaviour {
 		_score = 0;
 		SetScoreText ();
 		InvokeRepeating ("AddPoints", 1.0f, 1.0f);
-	}
+	    if (Instance) throw new Exception("Multiple CountScore instances");
+	    Instance = this;
+    }
 
 	private void SetScoreText (){
 		_scoreText.text = _score.ToString();
@@ -29,8 +31,6 @@ public class CountScore : MonoBehaviour {
 
 	public void SetTitleText(string text){
 		_titleText.text = text;
-	    if (Instance) throw new Exception("Multiple CountScore instances");
-	    Instance = this;
 
     }
 

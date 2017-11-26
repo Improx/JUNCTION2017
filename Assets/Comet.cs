@@ -34,9 +34,12 @@ public class Comet : Grabbable, ISpaceObject {
 		if(hit == null && collision.rigidbody) {
 		    var grabbable = collision.rigidbody.GetComponent<Grabbable>();
 
-            if (Flying) CountScore.Instance.AddPoints(100);
 
-		    if (grabbable) Destroy(grabbable.gameObject);
+		    if (grabbable)
+		    {
+		        if (grabbable.Flying) CountScore.Instance.AddPoints(100);
+                Destroy(grabbable.gameObject);
+		    }
         }
 
 	    if (hit) {
