@@ -22,6 +22,7 @@ ExportedObj/
 *.booproj
 *.svd
 *.pdb
+*.DS_Store
 
 # Unity3D generated meta files
 *.pidb.meta
@@ -32,3 +33,8 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+\.vscode/
+.DS_Store
+.DS_Store
+Assets/Music/.DS_Store

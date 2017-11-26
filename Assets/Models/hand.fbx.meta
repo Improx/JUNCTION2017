@@ -1,0 +1,228 @@
+fileFormatVersion: 2
+guid: 42ef27aa3d24f40abb9d313ef51aa56b
+timeCreated: 1511558295
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Armature
+    100002: Bone
+    100004: Bone.001
+    100006: Bone.002
+    100008: Bone.003
+    100010: Bone.004
+    100012: Bone.005
+    100014: Bone.006
+    100016: Bone.006_end
+    100018: Bone.007
+    100020: Bone.008
+    100022: Bone.009
+    100024: Bone.009_end
+    100026: Bone.010
+    100028: Bone.011
+    100030: Bone.012
+    100032: Bone.012_end
+    100034: Bone.013
+    100036: Bone.014
+    100038: Bone.015
+    100040: Bone.015_end
+    100042: Bone.016
+    100044: Bone.017
+    100046: Bone.018
+    100048: Bone.018_end
+    100050: Cube
+    100052: //RootNode
+    100054: Camera
+    100056: Lamp
+    100058: ORG-Bone
+    100060: ORG-Bone.001
+    100062: ORG-Bone.002
+    100064: ORG-Bone.003
+    100066: ORG-Bone.004
+    100068: ORG-Bone.005
+    100070: ORG-Bone.006
+    100072: ORG-Bone.006_end
+    100074: ORG-Bone.007
+    100076: ORG-Bone.008
+    100078: ORG-Bone.009
+    100080: ORG-Bone.009_end
+    100082: ORG-Bone.010
+    100084: ORG-Bone.011
+    100086: ORG-Bone.012
+    100088: ORG-Bone.012_end
+    100090: ORG-Bone.013
+    100092: ORG-Bone.014
+    100094: ORG-Bone.015
+    100096: ORG-Bone.015_end
+    100098: ORG-Bone.016
+    100100: ORG-Bone.017
+    100102: ORG-Bone.018
+    100104: ORG-Bone.018_end
+    100106: rig
+    100108: root
+    100110: WGT-rig_root
+    100112: WGTS_rig
+    400000: Armature
+    400002: Bone
+    400004: Bone.001
+    400006: Bone.002
+    400008: Bone.003
+    400010: Bone.004
+    400012: Bone.005
+    400014: Bone.006
+    400016: Bone.006_end
+    400018: Bone.007
+    400020: Bone.008
+    400022: Bone.009
+    400024: Bone.009_end
+    400026: Bone.010
+    400028: Bone.011
+    400030: Bone.012
+    400032: Bone.012_end
+    400034: Bone.013
+    400036: Bone.014
+    400038: Bone.015
+    400040: Bone.015_end
+    400042: Bone.016
+    400044: Bone.017
+    400046: Bone.018
+    400048: Bone.018_end
+    400050: Cube
+    400052: //RootNode
+    400054: Camera
+    400056: Lamp
+    400058: ORG-Bone
+    400060: ORG-Bone.001
+    400062: ORG-Bone.002
+    400064: ORG-Bone.003
+    400066: ORG-Bone.004
+    400068: ORG-Bone.005
+    400070: ORG-Bone.006
+    400072: ORG-Bone.006_end
+    400074: ORG-Bone.007
+    400076: ORG-Bone.008
+    400078: ORG-Bone.009
+    400080: ORG-Bone.009_end
+    400082: ORG-Bone.010
+    400084: ORG-Bone.011
+    400086: ORG-Bone.012
+    400088: ORG-Bone.012_end
+    400090: ORG-Bone.013
+    400092: ORG-Bone.014
+    400094: ORG-Bone.015
+    400096: ORG-Bone.015_end
+    400098: ORG-Bone.016
+    400100: ORG-Bone.017
+    400102: ORG-Bone.018
+    400104: ORG-Bone.018_end
+    400106: rig
+    400108: root
+    400110: WGT-rig_root
+    400112: WGTS_rig
+    2000000: Camera
+    2300000: WGT-rig_root
+    2300002: WGTS_rig
+    3300000: WGT-rig_root
+    3300002: WGTS_rig
+    4300000: Cube
+    4300002: WGTS_rig
+    4300004: WGT-rig_root
+    7400000: Armature|Mint
+    7400002: Armature|Idle
+    7400004: Armature|MintInstant
+    9500000: //RootNode
+    10800000: Lamp
+    13700000: Cube
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Nail
+    second: {fileID: 2100000, guid: 3bb74ccba0388459aaf7759a7b31397b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: No Name
+    second: {fileID: 2100000, guid: fa2354145d34c496eb6fafced3bd6560, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Skin
+    second: {fileID: 2100000, guid: d4ee1a19490f7451b9c6fa9bf63ecc98, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
